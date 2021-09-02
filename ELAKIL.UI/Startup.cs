@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using FluentValidation.AspNetCore;
 namespace ELAKIL.UI
 {
     public class Startup
@@ -30,7 +30,7 @@ namespace ELAKIL.UI
             services.AddBusiness(Configuration);
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddRazorPages();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddFluentValidation().AddRazorRuntimeCompilation();
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Identity/Account/Login";

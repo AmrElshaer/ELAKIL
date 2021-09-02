@@ -9,6 +9,7 @@ namespace ELAKIL.Business.IService
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<Category>> GetCategories();
+        Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<int> AddCategoryAsync(Category category);
     }
 }

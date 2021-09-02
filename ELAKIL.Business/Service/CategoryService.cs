@@ -18,7 +18,17 @@ namespace ELAKIL.Business.Service
         {
             _context = context;
         }
-        public async Task<IEnumerable<Category>> GetCategories()
+
+        public async Task<int> AddCategoryAsync(Category category)
+        {
+            if (category is null)
+                throw new ArgumentNullException();
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+            return category.Id;
+        }
+
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await _context.Categories.ToListAsync();
         }
