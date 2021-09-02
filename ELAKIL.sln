@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELAKIL.UI", "ELAKIL.UI\ELAKIL.UI.csproj", "{88205B0F-301B-4E98-837C-D94691CDA823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELAKIL.Business", "ELAKIL.Business\ELAKIL.Business.csproj", "{99C89222-6D4A-478A-9572-9B0140BF12ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88205B0F-301B-4E98-837C-D94691CDA823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88205B0F-301B-4E98-837C-D94691CDA823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88205B0F-301B-4E98-837C-D94691CDA823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88205B0F-301B-4E98-837C-D94691CDA823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99C89222-6D4A-478A-9572-9B0140BF12ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C89222-6D4A-478A-9572-9B0140BF12ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C89222-6D4A-478A-9572-9B0140BF12ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C89222-6D4A-478A-9572-9B0140BF12ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C512A97B-FF4F-4468-87C7-98FF7B90558B}
+	EndGlobalSection
+EndGlobal
