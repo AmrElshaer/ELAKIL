@@ -23,6 +23,8 @@ namespace ELAKIL.UI
         }
 
         // Testing by Ahmed Mansour
+        // Another New
+        // One more
 
         public IConfiguration Configuration { get; }
 
