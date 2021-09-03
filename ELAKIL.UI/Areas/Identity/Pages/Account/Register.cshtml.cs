@@ -30,7 +30,6 @@ namespace ELAKIL.UI.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger
             )
         //IEmailSender emailSender)
-            ILogger<RegisterModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
