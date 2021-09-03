@@ -21,5 +21,6 @@ namespace ELAKIL.Business.Contexts
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

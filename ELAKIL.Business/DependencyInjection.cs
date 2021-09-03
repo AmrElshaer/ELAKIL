@@ -31,6 +31,7 @@ namespace ELAKIL.Business
 
             //Inject Services
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
             return services;
         }
     }
