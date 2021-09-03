@@ -14,6 +14,7 @@ namespace ELAKIL.Business.Configurations
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.Property(c => c.Name).HasColumnType("nvarchar(50)");
+            
         }
     }
 }
