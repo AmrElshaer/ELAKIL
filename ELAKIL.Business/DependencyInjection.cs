@@ -17,7 +17,7 @@ namespace ELAKIL.Business
              options.UseSqlServer(
                  configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>()
-                  .AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+                  .AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>().AddRoles<IdentityRole>();
             // Config Fluent Validation
             AssemblyScanner.FindValidatorsInAssembly(typeof(CategoryValidator).Assembly)
              .ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
