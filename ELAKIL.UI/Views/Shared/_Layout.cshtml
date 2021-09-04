@@ -63,11 +63,31 @@
         </div>
     </div>
 
+    @{var controllerName = string.Empty; }
+    @{object controllerObj; }
+
+    @if (ViewContext.RouteData.Values.TryGetValue("area", out controllerObj))
+    {
+        controllerName = controllerObj.ToString();
+    }
+
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-cente">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-            <h1 class="logo me-auto me-lg-0"><a href="index.html">Restaurantly</a></h1>
+            <h1 class="logo me-auto me-lg-0">
+                @if (controllerName != "Identity")
+                {
+                    @Html.ActionLink(linkText: "Restaurantly", actionName: "Index", controllerName: "Home",
+                    protocol: null, hostname: null, fragment: null,
+                    routeValues: null, htmlAttributes: null)
+                }
+                else
+                {
+                    <a asp-area="" asp-fragment="" 
+                       asp-controller="Home" asp-action="Index">Restaurantly</a>
+                }
+            </h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -83,22 +103,25 @@
                     }
                     <partial name="_LoginPartial" />
                 </ul>
-               
+
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-            <a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Book a table</a>
+
+            @if (controllerName != "Identity")
+            {
+                @Html.ActionLink(linkText: "Book a table", actionName: "Index", controllerName: "Home",
+                protocol: null, hostname: null, fragment: "book-a-table",
+                routeValues: null, htmlAttributes: new Dictionary<string, object> { { "class", "book-a-table-btn scrollto d-none d-lg-flex" } })
+            }
+            else
+            {
+                <a class="book-a-table-btn scrollto d-none d-lg-flex" asp-area="" 
+                   asp-fragment="book-a-table" asp-controller="Home" asp-action="Index">Book a table</a>
+            }
 
         </div>
     </header><!-- End Header -->
     <main>
-        @{var controllerName = string.Empty; }
-        @{object controllerObj; }
-
-        @if (ViewContext.RouteData.Values.TryGetValue("area", out controllerObj))
-        {
-            controllerName = controllerObj.ToString();
-        }
-
         @if (controllerName == "Identity")
         {
             <section id="hero" class="d-flex align-items-center btn-">
