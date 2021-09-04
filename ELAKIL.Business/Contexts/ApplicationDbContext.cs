@@ -53,5 +53,9 @@ namespace ELAKIL.Business.Contexts
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+        public DbSet<OrderLine> OrderLines { get; set; }
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
