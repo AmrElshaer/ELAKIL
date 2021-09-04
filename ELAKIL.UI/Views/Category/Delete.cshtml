@@ -1,0 +1,49 @@
+﻿@model ELAKIL.Business.Entities.Category
+@{
+    ViewData["Title"] = "Add Category";
+}
+<main id="main">
+    <section class="breadcrumbs">
+        <div class="container" data-aos="fade-up">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Delete Category</h2>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Category</li>
+                </ol>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <div  data-aos="fade-up" data-aos-delay="100">
+                <div class="row">
+                    <div class="col-lg-6 details order-2 order-lg-1">
+                        <h3>@Model.Name</h3>
+                        <p class="fst-italic">@Model.Description</p>
+
+                        <form asp-action="DeleteConfirm" method="post" class="php-email-form">
+                            <input asp-for="Id" type="hidden" />
+                            <div class="mb-3"><button type="submit">Delete</button></div>
+                            <a href="/Category"><i class="bi bi-arrow-left"></i> Go Back</a>
+                        </form>
+                    </div>
+                    @if (Model.Image != null)
+                    {
+                        <div class="col-lg-4 text-center order-1 order-lg-2">
+                            <img src="@Model.Image" alt="" class="img-fluid">
+                        </div>
+                    }
+
+                </div>
+            </div>
+         
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+

@@ -28,9 +28,33 @@ namespace ELAKIL.Business.Service
             return category.Id;
         }
 
+        public async Task DeleteCategoryAsync(int id)
+        {
+           
+            _context.Categories.Remove(await GetCategoryAsync(id));
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> EditCategoryAsync(Category category)
+        {
+            if (category is null)
+                throw new ArgumentNullException($"Entity Category {category.Id} Not Found");
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
+            return category.Id;
+        }
+
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await _context.Categories.ToListAsync();
+        }
+
+        public async Task<Category> GetCategoryAsync(int id)
+        {
+            var cat = await _context.Categories.FindAsync(id);
+            if (cat is null)
+                throw new ArgumentNullException($"Entity Category {id} Not Found");
+            return cat;
         }
     }
 }

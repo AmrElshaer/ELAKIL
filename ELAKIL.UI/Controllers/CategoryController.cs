@@ -37,5 +37,31 @@ namespace ELAKIL.UI.Controllers
             return View(category);
             
         }
+        public async Task< IActionResult> Edit(int id)
+        {
+            return View(await _categoryService.GetCategoryAsync(id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                await _categoryService.EditCategoryAsync(category);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            return View(await _categoryService.GetCategoryAsync(id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+                await _categoryService.DeleteCategoryAsync(id);
+                return RedirectToAction(nameof(Index));
+        }
     }
 }
