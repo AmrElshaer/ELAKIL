@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Configurations
 {
-    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    public class UserProfileConfiguration : IEntityTypeConfiguration<UserProfile>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<UserProfile> builder)
         {
             builder.Property(c => c.Name).HasColumnType("nvarchar(50)");
-            
         }
     }
 }

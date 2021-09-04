@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Entities
 {
-    public class Category
+    public class UserProfile
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Image { get; set; }
+        public string IdentityId { get; set; }
     }
 }

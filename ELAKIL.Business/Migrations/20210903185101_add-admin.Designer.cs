@@ -4,14 +4,16 @@ using ELAKIL.Business.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ELAKIL.Business.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210903185101_add-admin")]
+    partial class addadmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,12 +27,6 @@ namespace ELAKIL.Business.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(50)");
@@ -187,15 +183,15 @@ namespace ELAKIL.Business.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a68be0bc-57b7-4f67-972b-c91909c725f5",
+                            ConcurrencyStamp = "1c7c442d-8465-4ff8-9d4a-76cac76021e0",
                             Email = "Admin@elakil.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ELAKIL.COM",
                             NormalizedUserName = "ADMIN@ELAKIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFCvuA2QHz53+QCpKbChSW0vI5NATTsPS1nIkJ0iHuGfJf8CBYMvxD71d+MYPqLufQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFDlxqWtnvFyRVEoqgXrayCAFgFCr5qZKSxAQYxJ1AM463PFs4Z7/0L1T9TajyhcCA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eedfce2e-5dc7-49a7-9b6b-f6981086bb62",
+                            SecurityStamp = "daa97e77-daef-417b-9031-e4ebe74b51b7",
                             TwoFactorEnabled = false,
                             UserName = "Admin@elakil.com"
                         });

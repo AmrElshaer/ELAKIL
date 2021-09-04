@@ -1,13 +1,13 @@
 ﻿@model ELAKIL.Business.Entities.Category
 @{
-    ViewData["Title"] = "Add Category";
+    ViewData["Title"] = "Edit Category";
 }
 <main id="main">
     <section class="breadcrumbs">
         <div class="container" data-aos="fade-up">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>New Category</h2>
+                <h2>Edit Category</h2>
                 <ol>
                     <li><a href="index.html">Home</a></li>
                     <li>Category</li>
@@ -21,8 +21,8 @@
         <div class="container" data-aos="fade-up">
             <div class="row">
                 <div class="col-8">
-                    <form asp-action="Create" method="post" class="php-email-form">
-
+                    <form asp-action="Edit" method="post" class="php-email-form">
+                        <input asp-for="Id" type="hidden" />
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <input class="form-control" asp-for="Name" placeholder="Category Name" required />
@@ -46,10 +46,10 @@
                     </form>
                 </div>
                 <div class="col-4">
-                    <img  id="ImageViewer" />
+                    <img src="@(Model.Image)" id="ImageViewer"/>
                 </div>
             </div>
-           
+          
         </div>
     </section>
 
