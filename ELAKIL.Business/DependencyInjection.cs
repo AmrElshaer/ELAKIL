@@ -33,6 +33,7 @@ namespace ELAKIL.Business
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IMealService, MealService>();
+            services.AddScoped<IOrderService, OrderService>();
             return services;
         }
     }
