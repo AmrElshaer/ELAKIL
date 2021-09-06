@@ -1,4 +1,5 @@
-﻿using ELAKIL.Business.Entities;
+﻿using ELAKIL.Business.Common;
+using ELAKIL.Business.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace ELAKIL.Business.IService
         Task DeleteAsync(int id);
         Task<Order> GetOrderAsync(int id);
         Task<IEnumerable<Order>> GetOrdersAsync(DateTime? orderDate, DateTime? deliverDate, string status, int? code, string user);
+        Task UpdateOrderStatusAsync(int id, OrderStatus orderStatus);
     }
 }

@@ -1,4 +1,5 @@
-﻿using ELAKIL.Business.Contexts;
+﻿using ELAKIL.Business.Common;
+using ELAKIL.Business.Contexts;
 using ELAKIL.Business.Entities;
 using ELAKIL.Business.IService;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,13 @@ namespace ELAKIL.Business.Service
             var order=await _context.Orders.FindAsync(id);
             if (order is null) throw new ArgumentNullException($"Order not found {id}");
             _context.Orders.Remove(order);
+            await  _context.SaveChangesAsync();
+        }
+        public async Task UpdateOrderStatusAsync(int id,OrderStatus orderStatus)
+        {
+            var order =await _context.Orders.FindAsync(id);
+            order.Status = orderStatus.ToString();
+            await _context.SaveChangesAsync();
         }
     }
 }
