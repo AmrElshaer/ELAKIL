@@ -1,0 +1,117 @@
+﻿@model OrderSearchModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<main id="main">
+    <section class="breadcrumbs">
+        <div class="container" data-aos="fade-up">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="/Orders/Index">Orders</a>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Orders</li>
+                </ol>
+            </div>
+
+        </div>
+    </section>
+    <section>
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Orders</h2>
+            </div>
+            <div>
+                <div class="mb-3">
+                    <form method="get">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="OrderDate">Order Date</label>
+                                <input type="date" class="form-control" asp-for="OrderDate"  >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="DeliverDate">Deliver Date</label>
+                                <input type="date" class="form-control" asp-for="DeliverDate"  >
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="user">User</label>
+                                <input   class="form-control" asp-for="User"  placeholder="User">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="status">StatUs</label>
+                                <select asp-for="Status"
+                                        class="form-control"
+                                        asp-items="Html.GetEnumSelectList<OrderStatus>()">
+                                    <option selected disabled>Select type ...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="code"># Code</label>
+                                <input   asp-for="Code" class="form-control"  placeholder="Code">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning m-auto"><i class="bi bi-search"></i></button>
+                        </div>
+                        
+                    </form>
+                </div>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>
+                                # Code
+                            </th>
+                            <th>
+                                User
+                            </th>
+                            <th>
+                                Order Date
+                            </th>
+                            <th>
+                                Deliver Date
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Orders)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @item.UserProfile.Name
+                                </td>
+                                <td>
+                                    @item.OrderDate.ToShortDateString()
+                                </td>
+                                <td>
+                                    @item.DeliverDate.ToShortDateString()
+                                </td>
+                                <td>
+                                    @item.Status
+                                </td>
+                                <td>
+                                    <a href="/Orders/Details/@item.Id" class="mr-2"><i class="bi bi-info-circle"></i></a>
+                                    <a href="/Category/Edit/@item.Id" class="mr-2"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="/Category/Delete/@item.Id"><i class="bi bi-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+    </section>
+    </main>
+    
