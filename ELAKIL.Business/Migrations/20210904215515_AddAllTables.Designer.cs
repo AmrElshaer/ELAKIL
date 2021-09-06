@@ -4,50 +4,22 @@ using ELAKIL.Business.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ELAKIL.Business.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210904215515_AddAllTables")]
+    partial class AddAllTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ELAKIL.Business.Entities.About", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AboutUs")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FaceBook")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Twitter")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Whatsapp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Abouts");
-                });
 
             modelBuilder.Entity("ELAKIL.Business.Entities.Category", b =>
                 {
@@ -96,7 +68,7 @@ namespace ELAKIL.Business.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Meals");
+                    b.ToTable("Meal");
                 });
 
             modelBuilder.Entity("ELAKIL.Business.Entities.Order", b =>
@@ -140,7 +112,7 @@ namespace ELAKIL.Business.Migrations
 
                     b.HasIndex("UserProfileId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("ELAKIL.Business.Entities.OrderLine", b =>
@@ -165,7 +137,7 @@ namespace ELAKIL.Business.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderLines");
+                    b.ToTable("OrderLine");
                 });
 
             modelBuilder.Entity("ELAKIL.Business.Entities.UserProfile", b =>
@@ -315,15 +287,15 @@ namespace ELAKIL.Business.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2dfce8b7-c0aa-4592-a703-4a5af2450b81",
+                            ConcurrencyStamp = "c3ed842b-886a-4e48-817e-f705fcd9af92",
                             Email = "Admin@elakil.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ELAKIL.COM",
                             NormalizedUserName = "ADMIN@ELAKIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHUSNzqURDr8lstYaS22sTpbdl4q8fNskb9Au6qhxBIu3xmK6tuO4HtaXlXZ5YfWQw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEApuCK1kgJ7DGl2e9wZ7PWCEql5lHasoJqKLFzRbZBAfB2BX8afN9/mTKRqM1gkPTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dcf0daa1-a58d-43a6-9827-fe23b6be8ed6",
+                            SecurityStamp = "9fcd8930-869c-4f93-a7c0-143d96230c0a",
                             TwoFactorEnabled = false,
                             UserName = "Admin@elakil.com"
                         });

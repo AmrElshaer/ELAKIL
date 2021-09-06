@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ELAKIL.Business.Entities
+{
+    public class About
+    {
+        public int Id { get; set; }
+        public string AboutUs { get; set; }
+        public string Image { get; set; }
+        public string FaceBook { get; set; }
+        public string Twitter { get; set; }
+        public string Whatsapp { get; set; }
+        public string Number { get; set; }
+    }
+}
