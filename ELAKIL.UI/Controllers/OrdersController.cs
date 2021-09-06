@@ -28,5 +28,16 @@ namespace ELAKIL.UI.Controllers
         {
            return View(await _orderService.GetOrderAsync(id));
         }
+        public async Task< IActionResult> Delete(int id)
+        {
+
+            return View(await _orderService.GetOrderAsync(id));
+        }
+        [HttpPost,ActionName("Delete")]
+        public async Task< IActionResult> ConfirmDelete(int id)
+        {
+            await _orderService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

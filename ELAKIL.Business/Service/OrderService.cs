@@ -32,5 +32,11 @@ namespace ELAKIL.Business.Service
             return await _context.Orders.Include(a => a.OrderLines).ThenInclude(a => a.Meal)
                 .Include(a => a.UserProfile).FirstOrDefaultAsync(a=>a.Id==id);
         }
+        public async Task DeleteAsync(int id)
+        {
+            var order=await _context.Orders.FindAsync(id);
+            if (order is null) throw new ArgumentNullException($"Order not found {id}");
+            _context.Orders.Remove(order);
+        }
     }
 }
