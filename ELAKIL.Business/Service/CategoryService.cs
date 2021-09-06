@@ -30,7 +30,6 @@ namespace ELAKIL.Business.Service
 
         public async Task DeleteCategoryAsync(int id)
         {
-           
             _context.Categories.Remove(await GetCategoryAsync(id));
             await _context.SaveChangesAsync();
         }
