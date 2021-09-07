@@ -9,19 +9,9 @@ namespace ELAKIL.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMealService _mealService;
-        private readonly ICategoryService _categoryService;
-
-        public HomeController(IMealService mealService, ICategoryService categoryService)
-        {
-            _mealService = mealService;
-            _categoryService = categoryService;
-        }
 
         public IActionResult Index()
         {
-            ViewBag.AllCats = _categoryService.GetCategoriesAsync().Result;
-            ViewBag.AllMels = _mealService.GetMealsAsync().Result;
             return View();
         }
 
