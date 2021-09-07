@@ -1,4 +1,5 @@
 ﻿using ELAKIL.Business.Common;
+using ELAKIL.Business.Entities;
 using ELAKIL.Business.IService;
 using ELAKIL.UI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,17 @@ namespace ELAKIL.UI.Controllers
         public async Task< IActionResult> ConfirmDelete(int id)
         {
             await _orderService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            return View(await _orderService.GetOrderAsync(id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,OrderStatus status)
+        {
+            await  _orderService.UpdateOrderStatusAsync(id,status);
             return RedirectToAction(nameof(Index));
         }
     }
