@@ -22,15 +22,16 @@ namespace ELAKIL.Business.Service
         {
             if (userCartItem is null)
                 throw new ArgumentNullException();
-            await _context.UserCartItems.AddAsync(userCartItem);
-            await _context.SaveChangesAsync();
+            _context.UserCartItems.Add(userCartItem);
+            _context.SaveChanges();
             return userCartItem.ID;
         }
 
-        public async Task DeleteUserCartItemAsync(int id)
+        public void DeleteUserCartItemAsync(int id)
         {
-            _context.UserCartItems.Remove(await GetUserCartItemAsync(id));
-            await _context.SaveChangesAsync();
+            _context.UserCartItems.Attach(GetUserCartItemAsync(id).Result);
+            _context.UserCartItems.Remove(GetUserCartItemAsync(id).Result);
+            _context.SaveChangesAsync();
         }
 
         public async Task<int> EditUserCartItemAsync(UserCartItem userCartItem)

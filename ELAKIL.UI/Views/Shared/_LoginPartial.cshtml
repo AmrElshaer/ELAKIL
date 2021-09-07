@@ -13,10 +13,15 @@
         </form>
     </li>
 
-    <partial name="_Checkout" />
+    if (!User.IsInRole(ApplicationRoles.Admin.ToString()))
+    {
+        <partial name="_Checkout" />
+    }
 }
 else
 {
+
+
     <li class="nav-item">
         <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Service
 {
-    public class OrderService:IOrderService
+    public class OrderService : IOrderService
     {
         private readonly ApplicationDbContext _context;
 
@@ -44,6 +44,12 @@ namespace ELAKIL.Business.Service
         {
             var order =await _context.Orders.FindAsync(id);
             order.Status = orderStatus.ToString();
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddOrderAsync(Order order)
+        {
+            await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
         }
     }

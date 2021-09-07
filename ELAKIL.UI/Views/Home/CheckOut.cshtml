@@ -1,19 +1,23 @@
 ﻿@using ELAKIL.Business.IService
 @model IEnumerable<ELAKIL.Business.Entities.UserCartItem>
-@inject IMealService mealService
+@inject IMealService mealService   
 
 
-
-<div class="mt-auto ml-5 mr-5 mb-5">
+<div style="margin-top: 105px;"></div>
+<div class="mt-auto ml-5 mr-5 mb-5 align-con">
     <div class="row">
+        <style scoped>
+            tbody{
+                color: navajowhite;
+            }
+        </style>
         <div class="col">
             <h2>Checkout</h2>
-            @if (Model == null)
+            @if (Model.Count() <= 0)
             {
                 <div class="alert alert-danger">
                     <strong>No product added to cart!</strong>
                 </div>
-
             }
             else
             {
@@ -23,6 +27,7 @@
                             <th>Meal</th>
                             <th>Quantity</th>
                             <th>Price</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,14 +39,63 @@
                                 <td>@container.Name</td>
                                 <td>1</td> <!-- Make it dynamic amount of item -->
                                 <td>$@container.Price</td>
+                                <td><a asp-action="DeleteItemFromCart" asp-route-Id="@item.ID" asp-route-UId="@item.UserID">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
                             totalOrder += container.Price;
                         }
 
                     </tbody>
                 </table>
-                <a class="btn btn-success" href="@Url.Action("CheckoutDetails","Home")">Checkout >></a>
+                <form action="CheckOut" method="post" class="container" data-aos="fade-up">
+                    <div class="php-email-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="hidden" name="UserProfileId" value="@Model.FirstOrDefault().UserID" />
+                                <!--<input type="hidden" name="UserProfile" value="User.Identity.Name" />-->
+                                <input type="hidden" name="OrderDate" value="@DateTime.Now" />
+                                <div class="form-group row">
+                                    <label class="col-md-6 col-form-label">Deliver Date</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime-local" name="DeliverDate" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-6 col-form-label">Governorate</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="Governorate" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-6 col-form-label">Address</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="Address" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-6 col-form-label">Phone</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="Phone" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-6 col-form-label">Another Phone</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="AnotherPhone" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row mt-5">
+                        <div class="col">
+                            <button class="btn btn-success">Checkout >></button>
+                        </div>
+                    </div>
+                </form>
             }
         </div>
     </div>
