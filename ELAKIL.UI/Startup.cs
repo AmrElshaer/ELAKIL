@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
 using ELAKIL.Business.Common.Models;
 using ELAKIL.Business.IService;
+using Rotativa.AspNetCore;
 
 namespace ELAKIL.UI
 {
@@ -56,7 +57,7 @@ namespace ELAKIL.UI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,Microsoft.AspNetCore.Hosting.IHostingEnvironment env2)
         {
             if (env.IsDevelopment())
             {
@@ -77,7 +78,8 @@ namespace ELAKIL.UI
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            // using this to make print
+            RotativaConfiguration.Setup(env2);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

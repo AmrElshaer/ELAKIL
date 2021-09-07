@@ -1,5 +1,6 @@
-﻿@using ELAKIL.Business.IService;
-@inject IUserProfileService userProfileService
-
-@{ var myUser = userProfileService.GetUserProfileId(User.Identity.Name);}
-<li><a class="nav-link scrollto" asp-area="" asp-fragment="" asp-route-Id="@myUser" asp-controller="Home" asp-action="CheckOut">Checkout</a></li>
+﻿@if (!User.IsInRole("Admin"))
+{
+    @inject IUserProfileService userProfileService
+    var myUser = userProfileService.GetUserProfileId(User.Identity.Name);
+    <li><a class="nav-link scrollto" asp-area="" asp-fragment="" asp-route-Id="@myUser" asp-controller="Home" asp-action="CheckOut">Checkout</a></li>
+}

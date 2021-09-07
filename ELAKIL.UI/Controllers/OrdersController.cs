@@ -3,6 +3,7 @@ using ELAKIL.Business.Entities;
 using ELAKIL.Business.IService;
 using ELAKIL.UI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,10 @@ namespace ELAKIL.UI.Controllers
         {
 
             return View(await _orderService.GetOrderAsync(id));
+        }
+        public async Task<IActionResult> Print(int id)
+        {
+            return new ViewAsPdf(await _orderService.GetOrderAsync(id));
         }
         [HttpPost,ActionName("Delete")]
         public async Task< IActionResult> ConfirmDelete(int id)

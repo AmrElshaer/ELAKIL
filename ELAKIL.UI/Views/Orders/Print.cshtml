@@ -1,0 +1,121 @@
+﻿@model ELAKIL.Business.Entities.Order
+@{
+    Layout = "_Print";
+    ViewBag.Title = "Print Order";
+}
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <label class="col-md-2 col-form-label">User</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="UserProfile.Name" readonly />
+            </div>
+
+        </div>
+        <div>
+            <label class="col-md-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Phone" readonly />
+            </div>
+
+        </div>
+        <div>
+            <label class="col-md-2 col-form-label">Gover*</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Governorate" readonly />
+            </div>
+
+        </div>
+        <div>
+            <label class="col-md-2 col-form-label">Order*</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="date" asp-for="OrderDate" readonly />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div>
+            <label class="col-md-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Address" readonly />
+            </div>
+
+        </div>
+        <div>
+            <label class="col-md-2 col-form-label">Phone 2</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="AnotherPhone" readonly />
+            </div>
+        </div>
+        <div>
+            <label class="col-md-2 col-form-label">Station</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Station" readonly />
+            </div>
+        </div>
+        <div>
+            <label class="col-md-2 col-form-label">Deliver*</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="DeliverDate" type="date" readonly />
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>QTN</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderLines)
+            {
+                <tr>
+                    <td>@item.Meal.Name</td>
+                    <td>@item.Meal.Price.ToString("n2")</td>
+                    <td>@item.Quantity</td>
+                    <td>@((item.Quantity*item.Meal.Price).ToString("n2"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="row mt-3">
+    <div class="row">
+
+
+        <div class="col">
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Total</label>
+                <div class="col-sm-10">
+                    <input class="form-control" readonly value="@(Model.OrderLines.Sum(a=>a.Meal.Price*a.Quantity).ToString("n2"))" />
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Remarks</label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Remarks" readonly />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
