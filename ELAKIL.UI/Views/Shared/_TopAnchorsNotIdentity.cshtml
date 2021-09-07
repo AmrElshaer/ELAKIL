@@ -1,4 +1,7 @@
-﻿<li>
+﻿@using ELAKIL.Business.IService;
+@inject IUserProfileService userProfileService
+
+<li>
     @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home",
 protocol: null, hostname: null, fragment: "hero", routeValues: null, htmlAttributes: null)
 </li>
@@ -18,3 +21,8 @@ protocol: null, hostname: null, fragment: "specials", routeValues: null, htmlAtt
     @Html.ActionLink(linkText: "Contact Us", actionName: "Index", controllerName: "Home",
 protocol: null, hostname: null, fragment: "contact", routeValues: null, htmlAttributes: null)
 </li>
+<li>
+    <!--{ var myUser = userProfileService.GetUserProfileId(User.Identity.Name);}
+    Html.ActionLink(linkText: "Checkout", actionName: "CheckOut", controllerName: "Home",
+protocol: null, hostname: null, fragment: "", routeValues: myUser, htmlAttributes: null)
+</li>-->
