@@ -91,10 +91,6 @@
                     {
                         <partial name="_ClientHeader" />
                     }
-                    @if (User.IsInRole(ApplicationRoles.User.ToString()))
-                    {
-                        <partial name="_Checkout" />
-                    }
                     <partial name="_LoginPartial" />
                 </ul>
 
