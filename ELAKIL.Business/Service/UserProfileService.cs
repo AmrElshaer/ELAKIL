@@ -25,5 +25,14 @@ namespace ELAKIL.Business.Service
             await _context.SaveChangesAsync();
             return userProfile.Id;
         }
+
+        public int GetUserProfileId(string Name)
+        {
+            var usrProfId = _context.UserProfiles.Where(x => x.Name == Name)
+                .FirstOrDefault().Id;
+            if (usrProfId == 0)
+                throw new ArgumentNullException($"Entity UserProfile {Name} Not Found");
+            return usrProfId;
+        }
     }
 }
