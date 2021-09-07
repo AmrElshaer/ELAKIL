@@ -1,0 +1,9 @@
+﻿@using ELAKIL.Business.IService;
+@inject IUserProfileService userProfileService
+
+
+<li>
+    @{ var myUser = userProfileService.GetUserProfileId(User.Identity.Name);}
+    @Html.ActionLink(linkText: "Checkout", actionName: "CheckOut", controllerName: "Home",
+protocol: null, hostname: null, fragment: "", routeValues: myUser, htmlAttributes: null)
+</li>

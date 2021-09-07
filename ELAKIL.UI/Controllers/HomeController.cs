@@ -1,4 +1,5 @@
-﻿using ELAKIL.Business.IService;
+﻿using ELAKIL.Business.Contexts;
+using ELAKIL.Business.IService;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,11 @@ namespace ELAKIL.UI.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IUserCartItemService _userCartItemService;
+        public HomeController(IUserCartItemService userCartItemService)
+        {
+            _userCartItemService = userCartItemService;
+        }
 
         public IActionResult Index()
         {
@@ -28,7 +34,9 @@ namespace ELAKIL.UI.Controllers
         // Make the VIEW and COMPLETE Order
         public IActionResult CheckOut(int Id)
         {
-            return View();
+            var AllMeals = _userCartItemService.GetUserCartItemsAsync()
+                .Result.Where(x => x.UserID == Id).ToList();
+            return View(AllMeals);
         }
 
         // TODO by Ahmed Nasr Elmasry Item Details Action
