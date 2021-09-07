@@ -10,31 +10,66 @@
         }
     </style>
 </head>
+<main id="main">
+    <section class="breadcrumbs">
+        <div class="container" data-aos="fade-up">
 
-<div class="ml-5 mr-5 mb-5">
-    <div class="row">
-        <div class="col">
-            <div class="row">
-                <h2>About US</h2>
-                <p>@Model.AboutUs</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>About</li>
+                </ol>
             </div>
-            <div class="row">
-                <a class="w-auto" href="@Model.FaceBook">
-                    <i class="bx bxl-facebook"></i> Facebook
-                </a>
-                <a class="w-auto" href="@Model.Twitter">
-                    <i class="bx bxl-twitter"></i> Twitter
-                </a>
-                <a class="w-auto" href="https://wa.me/@Model.Whatsapp">
-                    <i class="bx bxl-whatsapp"></i> @Model.Whatsapp
-                </a>
-                <a class="w-auto" href="#">
-                    <i class="bx bi-phone"></i> @Model.Number
-                </a>
-            </div>
+
         </div>
-        <div class="col">
-            <img class="w-100" src="https://poloniq.ro/uploads/pages/156879/software-comenzi-horeca.jpg" />
+    </section>
+
+    <div class="ml-5 mr-5 mb-5 mt-5" data-aos="fade-up">
+        <div class="row">
+            <div class="col">
+                <div class="row contact mb-5">
+                    <div class="col-lg-4">
+                        <div class="info">
+                            <div class="address">
+                                <i class="bi bi-geo-alt"></i>
+                                <h4>Location:</h4>
+                                <p>@(Model.Location)</p>
+                            </div>
+                            <div class="email">
+                                <i class="bi bi-envelope"></i>
+                                <h4>Email:</h4>
+                                <p>@(Model.Email)</p>
+                            </div>
+
+                            <div class="phone">
+                                <i class="bi bi-phone"></i>
+                                <h4>Call:</h4>
+                                <p>@(Model.Number)</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>@Model.AboutUs</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <a class="w-auto" href="@Model.FaceBook">
+                        <i class="bx bxl-facebook"></i> Facebook
+                    </a>
+                    <a class="w-auto" href="@Model.Twitter">
+                        <i class="bx bxl-twitter"></i> Twitter
+                    </a>
+                    <a class="w-auto" href="https://wa.me/@(Model.Whatsapp)">
+                        <i class="bx bxl-whatsapp"></i> @Model.Whatsapp
+                    </a>
+                  
+                </div>
+            </div>
+            <div class="col">
+                <img class="w-100" src="https://poloniq.ro/uploads/pages/156879/software-comenzi-horeca.jpg" />
+            </div>
         </div>
     </div>
-</div>
+</main>
