@@ -10,39 +10,69 @@
         }
     </style>
 </head>
+<main id="main">
+    <section class="breadcrumbs">
+        <div class="container" data-aos="fade-up">
 
-<form action="/about/edit" method="post" class="ml-5 mr-5 mb-5">
-    <div class="row">
-        <div class="form-group col">
-            <label for="aboutus">About Us</label>
-            <textarea  asp-for="AboutUs" class="form-control" id="aboutus" placeholder="Enter about us" rows="4"></textarea>
+            <div class="d-flex justify-content-between align-items-center">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>About</li>
+                </ol>
+            </div>
+
         </div>
-    </div>
-    <div class="row">
-        <div class="form-group col">
-            <label for="facebook">Facebook</label>
-            <input type="text" asp-for="FaceBook" class="form-control" id="facebook" placeholder="Enter Facebook link">
+    </section>
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+            <form action="/about/edit" method="post" class="ml-5 mr-5 mb-5">
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="aboutus">About Us</label>
+                        <textarea asp-for="AboutUs" class="form-control" id="aboutus" placeholder="Enter about us" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="facebook">Facebook</label>
+                        <input type="text" asp-for="FaceBook" class="form-control" id="facebook" placeholder="Enter Facebook link">
+                    </div>
+                    <div class="form-group col">
+                        <label for="twitter">Twitter</label>
+                        <input type="text" asp-for="Twitter" class="form-control" id="twitter" placeholder="Enter Twitter link">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label for="whatsapp">Whatsapp</label>
+                        <input type="text" asp-for="Whatsapp" class="form-control" id="whatsapp" placeholder="Enter Whatsapp number">
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="number">Number</label>
+                        <input type="text" asp-for="Number" class="form-control" id="number" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group col">
+                        <label for="image">Image</label>
+                        <input type="text" asp-for="Image" class="form-control" id="image" placeholder="Enter image link">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Location</label>
+                        <input type="text" asp-for="Location" class="form-control" placeholder="Enter Location">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="text" asp-for="Email" class="form-control" placeholder="Enter Email">
+                    </div>
+                </div>
+                <input type="hidden" asp-for="Id" />
+                <div class="text-center">
+                    <button class="btn btn-warning" type="submit">Save</button>
+                </div>
+                
+            </form>
         </div>
-        <div class="form-group col">
-            <label for="twitter">Twitter</label>
-            <input type="text" asp-for="Twitter" class="form-control" id="twitter" placeholder="Enter Twitter link">
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="form-group col-3">
-            <label for="whatsapp">Whatsapp</label>
-            <input type="text" asp-for="Whatsapp" class="form-control" id="whatsapp" placeholder="Enter Whatsapp number">
-        </div>
-        <div class="form-group col-3">
-            <label for="number">Number</label>
-            <input type="text" asp-for="Number" class="form-control" id="number" placeholder="Enter phone number">
-        </div>
-        <div class="form-group col">
-            <label for="image">Image</label>
-            <input type="text" asp-for="Image" class="form-control" id="image" placeholder="Enter image link">
-        </div>
-    </div>
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
+    </section>
+</main>

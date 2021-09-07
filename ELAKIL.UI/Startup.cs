@@ -13,6 +13,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
+using ELAKIL.Business.Common.Models;
+using ELAKIL.Business.IService;
+
 namespace ELAKIL.UI
 {
     public class Startup
@@ -39,6 +42,17 @@ namespace ELAKIL.UI
             {
                 options.LoginPath = "/Identity/Account/Login";
             });
+            //Mail Configration
+            var mailSetting = Configuration.GetSection(nameof(MailSettings));
+            services.Configure<MailSettings>(a => {
+                a.DisplayName = mailSetting[nameof(MailSettings.DisplayName)];
+                a.Host = mailSetting[nameof(MailSettings.Host)];
+                a.Password = mailSetting[nameof(MailSettings.Password)];
+                a.Port = Convert.ToInt32(mailSetting[nameof(MailSettings.Port)]);
+                a.Mail = mailSetting[nameof(MailSettings.Mail)];
+            });
+            //inject
+            services.AddTransient<IMailService, MailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

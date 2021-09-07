@@ -45,6 +45,8 @@ namespace ELAKIL.Business.Service
             about.Whatsapp = updatedAbout.Whatsapp;
             about.Number = updatedAbout.Number;
             about.Image = updatedAbout.Image;
+            about.Location = updatedAbout.Location;
+            about.Email = updatedAbout.Email;
             await context.SaveChangesAsync();
             return about.Id;
         }
