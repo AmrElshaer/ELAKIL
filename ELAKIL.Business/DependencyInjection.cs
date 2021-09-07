@@ -14,8 +14,8 @@ namespace ELAKIL.Business
         public static IServiceCollection AddBusiness(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-             options.UseSqlServer(
-                 configuration.GetConnectionString("DefaultConnection")));
+             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")),
+             ServiceLifetime.Transient);
             services.AddIdentity<IdentityUser, IdentityRole>()
                   .AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>().AddRoles<IdentityRole>();
             // Config Fluent Validation

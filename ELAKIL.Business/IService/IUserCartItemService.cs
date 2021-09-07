@@ -11,7 +11,7 @@ namespace ELAKIL.Business.IService
         Task<IEnumerable<UserCartItem>> GetUserCartItemsAsync();
         Task<int> AddUserCartItemAsync(UserCartItem userCartItem);
         Task<int> EditUserCartItemAsync(UserCartItem userCartItem);
-        Task DeleteUserCartItemAsync(int id);
+        void DeleteUserCartItemAsync(int id);
         Task<UserCartItem> GetUserCartItemAsync(int id);
     }
 }

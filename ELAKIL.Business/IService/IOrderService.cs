@@ -10,6 +10,7 @@ namespace ELAKIL.Business.IService
 {
     public interface IOrderService
     {
+        Task AddOrderAsync(Order order);
         Task DeleteAsync(int id);
         Task<Order> GetOrderAsync(int id);
         Task<IEnumerable<Order>> GetOrdersAsync(DateTime? orderDate, DateTime? deliverDate, string status, int? code, string user);
