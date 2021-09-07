@@ -5,6 +5,8 @@ using ELAKIL.Business.IService;
 using ELAKIL.Business.Contexts;
 using ELAKIL.Business.Entities;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ELAKIL.Business.Service
 {
@@ -17,19 +19,26 @@ namespace ELAKIL.Business.Service
             this.context = context;
         }
 
-        public async Task<About> GetAboutAsync(int id)
+        public async Task<About> GetAboutAsync()
         {
-            About about = await context.Abouts.FindAsync(id);
-            if (about is null) 
-                throw new NullReferenceException($"About with id { id } not found");
+            About about = await context.Abouts.FirstOrDefaultAsync();
+            if (about is null)
+                about = new About();
             return about;
         }
 
-        public async Task<int> EditAboutAsync(int id, About updatedAbout)
+        public async Task<int> EditAddAboutAsync(About updatedAbout)
         {
-            About about = await context.Abouts.FindAsync(id);
-            if (about is null)
-                throw new NullReferenceException();
+            About about;
+            if (updatedAbout.Id == 0)
+            {
+                about = new About();
+                await context.Abouts.AddAsync(about);
+            }
+            else
+            {
+                about = await context.Abouts.FindAsync(updatedAbout.Id);
+            }
             about.AboutUs = updatedAbout.AboutUs;
             about.FaceBook = updatedAbout.FaceBook;
             about.Twitter = updatedAbout.Twitter;
