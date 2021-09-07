@@ -2,45 +2,49 @@
 @model IEnumerable<ELAKIL.Business.Entities.UserCartItem>
 @inject IMealService mealService
 
-@{
-    ViewBag.Title = "Checkout";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-<h2>Checkout</h2>
-@if (Model == null)
-{
-    <div class="alert alert-danger">
-        <strong>No product added to cart!</strong>
-    </div>
 
-}
-else
-{
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Meal</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{double totalOrder = 0.0; }
-            @foreach (var item in Model)
+<div class="mt-auto ml-5 mr-5 mb-5">
+    <div class="row">
+        <div class="col">
+            <h2>Checkout</h2>
+            @if (Model == null)
             {
-                <tr>
-                    @{var container = mealService.GetMealAsync(item.MealID).Result;}
-                    <td>@container.Name</td>
-                    <td>1</td> <!-- Make it dynamic amount of item -->
-                    <td>$@container.Price</td>
-                </tr>
-                totalOrder += container.Price;
+                <div class="alert alert-danger">
+                    <strong>No product added to cart!</strong>
+                </div>
+
             }
+            else
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Meal</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{double totalOrder = 0.0; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @{var container = mealService.GetMealAsync(item.MealID).Result;}
+                                <td>@container.Name</td>
+                                <td>1</td> <!-- Make it dynamic amount of item -->
+                                <td>$@container.Price</td>
+                            </tr>
+                            totalOrder += container.Price;
+                        }
 
-        </tbody>
-    </table>
-    <a class="btn btn-success" href="@Url.Action("CheckoutDetails","Home")">Checkout >></a>
+                    </tbody>
+                </table>
+                <a class="btn btn-success" href="@Url.Action("CheckoutDetails","Home")">Checkout >></a>
 
-}
+            }
+        </div>
+    </div>
+</div>
+
 

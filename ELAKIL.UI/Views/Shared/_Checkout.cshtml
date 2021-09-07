@@ -1,9 +1,5 @@
 ﻿@using ELAKIL.Business.IService;
 @inject IUserProfileService userProfileService
 
-
-<li>
-    @{ var myUser = userProfileService.GetUserProfileId(User.Identity.Name);}
-    @Html.ActionLink(linkText: "Checkout", actionName: "CheckOut", controllerName: "Home",
-protocol: null, hostname: null, fragment: "", routeValues: myUser, htmlAttributes: null)
-</li>
+@{ var myUser = userProfileService.GetUserProfileId(User.Identity.Name);}
+<li><a class="nav-link scrollto" asp-area="" asp-fragment="" asp-route-Id="@myUser" asp-controller="Home" asp-action="CheckOut">Checkout</a></li>
