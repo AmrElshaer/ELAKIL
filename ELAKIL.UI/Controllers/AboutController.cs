@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ELAKIL.Business.IService;
 using ELAKIL.Business.Entities;
+using Microsoft.AspNetCore.Authorization;
+using ELAKIL.Business.Common;
 
 namespace ELAKIL.UI.Controllers
 {
@@ -19,26 +21,31 @@ namespace ELAKIL.UI.Controllers
 
         // Show about page
         [HttpGet]
-        public async Task<IActionResult> Index(int id = 1)
+        public async Task<IActionResult> Index()
         {
-            About about = await aboutService.GetAboutAsync(id);
+            About about = await aboutService.GetAboutAsync();
             return View(about);
         }
 
         // Show edit about page
         [HttpGet]
-        public async Task<IActionResult> Edit(int id = 1)
+        [Authorize]
+        public async Task<IActionResult> Edit()
         {
-            About about = await aboutService.GetAboutAsync(id);
-            return View(about);
+            if (User.IsInRole(ApplicationRoles.Admin.ToString()))
+            {
+                About about = await aboutService.GetAboutAsync();
+                return View(about);
+            }
+            return RedirectToAction("Index");
         }
 
         // Edit about by id
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, About about)
+        public async Task<IActionResult> Edit(About about)
         {
-            id = await aboutService.EditAboutAsync(id, about);
-            return RedirectToAction("Index", new { id });
+            await aboutService.EditAddAboutAsync(about);
+            return RedirectToAction("Index");
         }
     }
 }

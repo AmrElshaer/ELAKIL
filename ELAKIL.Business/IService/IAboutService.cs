@@ -8,7 +8,7 @@ namespace ELAKIL.Business.IService
 {
     public interface IAboutService
     {
-        Task<About> GetAboutAsync(int id);
-        Task<int> EditAboutAsync(int id, About about);
+        Task<About> GetAboutAsync();
+        Task<int> EditAddAboutAsync(About about);
     }
 }
