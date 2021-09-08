@@ -74,9 +74,13 @@
                                 </div>
                                 <div class="menu-ingredients">
                                     <div> @item.Description</div>
-                                    <div>
-                                        <a class="scrollto badge" style="font-size: 20px; float: right;" rel="Add To Cart" asp-route-Id="@item.Id" asp-action="AddItemToCart"><i class="bi bi-cart"></i></a>
-                                    </div>
+                                    @if (!User.IsInRole("Admin"))
+                                    {
+                                        <div>
+                                            <a class="scrollto badge" style="font-size: 20px; float: right;" rel="Add To Cart" asp-route-Id="@item.Id" asp-action="AddItemToCart"><i class="bi bi-cart"></i></a>
+                                        </div>
+                                    }
+
                                 </div>
 
                             </div>
