@@ -93,27 +93,28 @@
                                     <thead>
                                         <tr>
                                             <th>Meal</th>
-                                            <th>Quantity</th>
                                             <th>Price</th>
+                                            <th>Quantity</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in Model)
+                                        @{var arrModel = Model.ToArray();}
+                                        @for (int i = 0; i < arrModel.Length; i++)
                                         {
-                                            <tr>
-
-                                                <td><img style="max-width:80px" class="rounded" src="@item.Meal.Image" alt=""> <span>@item.Meal.Name</span> </td>
-                                                <td>1</td> <!-- Make it dynamic amount of item -->
-                                                <td>@item.Meal.Price.ToString("n2")</td>
-                                                <td>
-                                                    <a asp-action="DeleteItemFromCart" asp-route-Id="@item.ID" asp-route-UId="@item.UserID">
-                                                        <i class="bi bi-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td style="display:none"><input name="OrderLines[@i].MealId" value="@arrModel[i].Meal.Id" /></td>
+                                            <td><img style="max-width:80px" class="rounded" src="@arrModel[i].Meal.Image" alt=""> <span>@arrModel[i].Meal.Name</span> </td>
+                                            <!-- Make it dynamic amount of item -->
+                                            <td>@arrModel[i].Meal.Price.ToString("n2")</td>
+                                            <td><input name="OrderLines[@i].Quantity" type="number" value="@arrModel[i].Quantity"/></td>
+                                            <td>
+                                                <a asp-action="DeleteItemFromCart" asp-route-Id="@arrModel[i].ID" asp-route-UId="@arrModel[i].UserID">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                         }
-
                                     </tbody>
                                 </table>
                         </div>

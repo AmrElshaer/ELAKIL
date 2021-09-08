@@ -2,7 +2,7 @@
 {
     @inject IUserProfileService userProfileService
     @inject IUserCartItemService _userCartItemService
-    var myUser = userProfileService.GetUserProfileId(User.Identity.Name);
+    var myUser =await userProfileService.GetUserProfileIdAsync(User.Identity.Name);
     var cartCount = (await _userCartItemService.GetUserCartItemsAsync(myUser)).Count();
     <li><a style="font-size: 20px;" class="nav-link scrollto" asp-area="" asp-fragment="" asp-route-Id="@myUser" asp-controller="Home" asp-action="CheckOut"><i class="bi bi-cart" style="font-size: 80%;"></i><span class="badge-pill" style="background-color: #cda45e;">@cartCount</span></a></li>
 }

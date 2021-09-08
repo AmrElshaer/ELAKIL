@@ -53,9 +53,9 @@ namespace ELAKIL.UI.Controllers
             return View(await _orderService.GetOrderAsync(id));
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(int id,OrderStatus status)
+        public async Task<IActionResult> Edit(int id,OrderStatus status,DateTime? deliverDate)
         {
-            await  _orderService.UpdateOrderStatusAsync(id,status);
+            await  _orderService.UpdateOrderStatusAsync(id,status, deliverDate);
             return RedirectToAction(nameof(Index));
         }
     }

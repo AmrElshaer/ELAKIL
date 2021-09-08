@@ -10,6 +10,6 @@ namespace ELAKIL.Business.IService
     public interface IUserProfileService
     {
         Task<int> AddUserProfileAsync(UserProfile userProfile);
-        public int GetUserProfileId(string Name);
+        Task<int> GetUserProfileIdAsync(string name);
     }
 }

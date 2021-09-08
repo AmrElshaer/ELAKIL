@@ -10,5 +10,6 @@ namespace ELAKIL.Business.Entities
         public int? MealId { get; set; }
         public Meal Meal { get; set; }
         public int ID { get; set; }
+        public int Quantity { get; set; }
     }
 }

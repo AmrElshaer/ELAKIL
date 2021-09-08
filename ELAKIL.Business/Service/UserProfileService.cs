@@ -1,6 +1,7 @@
 ﻿using ELAKIL.Business.Contexts;
 using ELAKIL.Business.Entities;
 using ELAKIL.Business.IService;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,13 +27,12 @@ namespace ELAKIL.Business.Service
             return userProfile.Id;
         }
 
-        public int GetUserProfileId(string Name)
+        public async Task<int> GetUserProfileIdAsync(string name)
         {
-            var usrProfId = _context.UserProfiles.Where(x => x.Name == Name)
-                .FirstOrDefault().Id;
-            if (usrProfId == 0)
-                throw new ArgumentNullException($"Entity UserProfile {Name} Not Found");
-            return usrProfId;
+            var user =await _context.UserProfiles.FirstOrDefaultAsync(a=>a.Name==name);
+            if (user is null)
+                throw new ArgumentNullException($"Entity UserProfile {name} Not Found");
+            return user.Id;
         }
     }
 }

@@ -14,6 +14,6 @@ namespace ELAKIL.Business.IService
         Task DeleteAsync(int id);
         Task<Order> GetOrderAsync(int id);
         Task<IEnumerable<Order>> GetOrdersAsync(DateTime? orderDate, DateTime? deliverDate, string status, int? code, string user);
-        Task UpdateOrderStatusAsync(int id, OrderStatus orderStatus);
+        Task UpdateOrderStatusAsync(int id, OrderStatus orderStatus,DateTime? deliverDate);
     }
 }

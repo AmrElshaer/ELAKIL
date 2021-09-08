@@ -37,12 +37,12 @@ namespace ELAKIL.UI.Controllers
         [Authorize]
         // TODO by Ahmed Mansour Add To Cart Action
         // Should add to user's cart and do nothing
-        public async Task<IActionResult> AddItemToCart(int Id)
+        public async Task<IActionResult> AddItemToCart(int id)
         {
-            var userId = _userProfileService.GetUserProfileId(User.Identity.Name);
+            var userId =await _userProfileService.GetUserProfileIdAsync(User.Identity.Name);
             await  _userCartItemService.AddUserCartItemAsync(new UserCartItem
             {
-                MealId = Id,
+                MealId = id,
                 UserID = userId
             });
             return View(viewName: "Index");
@@ -68,7 +68,6 @@ namespace ELAKIL.UI.Controllers
         {
             order.Status = OrderStatus.Active.ToString();
             var allMeals =await _userCartItemService.GetUserCartItemsAsync(order.UserProfileId);
-            order.OrderLines = allMeals.Select(a=>new OrderLine() { MealId=a.MealId,Quantity=1}).ToList();
              await _orderService.AddOrderAsync(order);
             allMeals.ToList().ForEach(a=> _userCartItemService.DeleteUserCartItemAsync(a.ID).GetAwaiter().GetResult());
             return RedirectToAction("Index");

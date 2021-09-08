@@ -73,9 +73,9 @@
                                     <a asp-route-Id="@item.Id" asp-action="ItemDetail">@item.Name</a><span>$@item.Price</span>
                                 </div>
                                 <div class="menu-ingredients">
-                                    @item.Description
+                                    <div> @item.Description</div>
                                     <div>
-                                        <a class="nav-link scrollto" asp-route-Id="@item.Id" asp-action="AddItemToCart">Add to Cart</a>
+                                        <a class="scrollto badge" style="font-size: 20px; float: right;" rel="Add To Cart" asp-route-Id="@item.Id" asp-action="AddItemToCart"><i class="bi bi-cart"></i></a>
                                     </div>
                                 </div>
 

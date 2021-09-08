@@ -40,10 +40,11 @@ namespace ELAKIL.Business.Service
             _context.Orders.Remove(order);
             await  _context.SaveChangesAsync();
         }
-        public async Task UpdateOrderStatusAsync(int id,OrderStatus orderStatus)
+        public async Task UpdateOrderStatusAsync(int id,OrderStatus orderStatus, DateTime? deliverDate)
         {
             var order =await _context.Orders.FindAsync(id);
             order.Status = orderStatus.ToString();
+            order.DeliverDate = deliverDate;
             await _context.SaveChangesAsync();
         }
 

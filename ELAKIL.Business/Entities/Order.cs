@@ -17,7 +17,7 @@ namespace ELAKIL.Business.Entities
         public UserProfile UserProfile { get; set; }
         public ICollection<OrderLine> OrderLines { get; set; }
         public DateTime OrderDate { get; set; }
-        public DateTime DeliverDate { get; set; }
+        public DateTime? DeliverDate { get; set; }
         public string Remarks { get; set; }
         public string Governorate { get; set; }
         public string Station { get; set; }
