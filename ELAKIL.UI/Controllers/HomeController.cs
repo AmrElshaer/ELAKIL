@@ -66,11 +66,11 @@ namespace ELAKIL.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckOut(Order order)
         {
-            order.Status = OrderStatus.Active.ToString();
-            var allMeals =await _userCartItemService.GetUserCartItemsAsync(order.UserProfileId);
-             await _orderService.AddOrderAsync(order);
-            allMeals.ToList().ForEach(a=> _userCartItemService.DeleteUserCartItemAsync(a.ID).GetAwaiter().GetResult());
-            return RedirectToAction("Index");
+                 order.Status = OrderStatus.Active.ToString();
+                 await _orderService.AddOrderAsync(order);
+                var allMeals = await _userCartItemService.GetUserCartItemsAsync(order.UserProfileId);
+                allMeals.ToList().ForEach(a=> _userCartItemService.DeleteUserCartItemAsync(a.ID).GetAwaiter().GetResult());
+                return RedirectToAction("Index");
         }
 
         // TODO by Ahmed Nasr Elmasry ==> Ahmed Mansour Item Details Action
