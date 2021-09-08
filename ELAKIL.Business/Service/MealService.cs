@@ -44,7 +44,7 @@ namespace ELAKIL.Business.Service
 
         public async Task<Meal> GetMealAsync(int id)
         {
-            var mel = await _context.Meals.FindAsync(id);
+            var mel = await _context.Meals.Include(a=>a.Category).FirstOrDefaultAsync(a=>a.Id==id);
             if (mel is null)
                 throw new ArgumentNullException($"Entity Meal {id} Not Found");
             return mel;
