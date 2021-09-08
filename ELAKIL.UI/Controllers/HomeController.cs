@@ -40,7 +40,7 @@ namespace ELAKIL.UI.Controllers
             var userId = _userProfileService.GetUserProfileId(User.Identity.Name);
             await  _userCartItemService.AddUserCartItemAsync(new UserCartItem
             {
-                MealID = Id,
+                MealId = Id,
                 UserID = userId
             });
             return View(viewName: "Index");
@@ -66,7 +66,7 @@ namespace ELAKIL.UI.Controllers
         {
             order.Status = OrderStatus.Active.ToString();
             var allMeals =await _userCartItemService.GetUserCartItemsAsync(order.UserProfileId);
-            order.OrderLines = allMeals.Select(a=>new OrderLine() { MealId=a.MealID,Quantity=1}).ToList();
+            order.OrderLines = allMeals.Select(a=>new OrderLine() { MealId=a.MealId,Quantity=1}).ToList();
              await _orderService.AddOrderAsync(order);
             allMeals.ToList().ForEach(a=> _userCartItemService.DeleteUserCartItemAsync(a.ID).GetAwaiter().GetResult());
             return RedirectToAction("Index");

@@ -23,127 +23,136 @@
                 <h2>Order</h2>
             </div>
             <div>
-                <form action="CheckOut" method="post" data-aos="fade-up">
-                    <div class="row mt-3">
+                @if (Model.Any())
+                {
+                    <form action="CheckOut" method="post" data-aos="fade-up">
+                        <div class="row mt-3">
 
-                        <div class="php-email-form">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row" style="display:none">
-                                        <label class="col-md-2 col-form-label">User</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="hidden" name="UserProfileId" value="@Model.FirstOrDefault().UserID" />
+                            <div class="php-email-form">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row" style="display:none">
+                                            <label class="col-md-2 col-form-label">User</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="hidden" name="UserProfileId" value="@Model.FirstOrDefault().UserID" />
+                                            </div>
+
                                         </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Phone</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" name="Phone" />
+                                            </div>
 
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Gover*</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" name="Governorate" />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Order*</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" name="OrderDate" value="@DateTime.Now.Date.ToShortDateString()" readonly />
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label">Phone</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" name="Phone" />
-                                        </div>
 
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label">Gover*</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" name="Governorate" />
-                                        </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Address</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" name="Address" />
+                                            </div>
 
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label">Order*</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text" name="OrderDate" value="@DateTime.Now.Date.ToShortDateString()" readonly />
                                         </div>
-
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Phone 2</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" name="AnotherPhone" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Station</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" name="Station" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label">Address</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" name="Address" />
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label">Phone 2</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" name="AnotherPhone" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label">Station</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" name="Station" />
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
 
-                    </div>
-
-                    <div class="row mt-3">
-                        @if (Model.Count() <= 0)
-                        {
-                            <div class="alert alert-danger">
-                                <strong>No product added to cart!</strong>
-                            </div>
-                        }
-                        else
-                        {
-                            <table class="table table-dark">
-                                <thead>
-                                    <tr>
-                                        <th>Meal</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{double totalOrder = 0.0; }
-                                    @foreach (var item in Model)
-                                    {
+                        <div class="row mt-3">
+                                <table class="table table-dark">
+                                    <thead>
                                         <tr>
-                                            @{var container = mealService.GetMealAsync(item.MealID).Result;}
-                                            <td>@container.Name</td>
-                                            <td>1</td> <!-- Make it dynamic amount of item -->
-                                            <td>$@container.Price</td>
-                                            <td>
-                                                <a asp-action="DeleteItemFromCart" asp-route-Id="@item.ID" asp-route-UId="@item.UserID">
-                                                    <i class="bi bi-trash"></i>
-                                                </a>
-                                            </td>
+                                            <th>Meal</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th></th>
                                         </tr>
-                                        totalOrder += container.Price;
-                                    }
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
 
-                                </tbody>
-                            </table>
-                        }
-                    </div>
-                    <div class="row mt-5">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group row">
-                                    <label class="col-md-2 col-form-label">Remarks</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" name="Remarks" />
+                                                <td><img style="max-width:80px" class="rounded" src="@item.Meal.Image" alt=""> <span>@item.Meal.Name</span> </td>
+                                                <td>1</td> <!-- Make it dynamic amount of item -->
+                                                <td>@item.Meal.Price.ToString("n2")</td>
+                                                <td>
+                                                    <a asp-action="DeleteItemFromCart" asp-route-Id="@item.ID" asp-route-UId="@item.UserID">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Remarks</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" name="Remarks" />
+                                        </div>
+
                                     </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Total</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text" readonly value="@(Model.Sum(a=>a.Meal.Price).ToString("n2"))" />
+                                        </div>
 
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <button type="submit" class="btn btn-warning">Checkout</button>
                                 </div>
                             </div>
-
-                            <div class="col">
-                                <button type="submit" class="btn btn-warning">Checkout</button>
-                            </div>
                         </div>
+                    </form>
+                }
+                else
+                {
+
+                    <div class="alert alert-danger">
+                        <strong>No product added to cart!</strong>
                     </div>
-                </form>
+                }
+
             </div>
         </div>
     </section>

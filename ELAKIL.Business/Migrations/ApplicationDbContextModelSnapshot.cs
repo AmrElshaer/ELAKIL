@@ -181,13 +181,15 @@ namespace ELAKIL.Business.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MealID")
+                    b.Property<int?>("MealId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("MealId");
 
                     b.ToTable("UserCartItems");
                 });
@@ -339,15 +341,15 @@ namespace ELAKIL.Business.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2999e179-e26c-4fd2-8e46-1c36faa5a0f1",
+                            ConcurrencyStamp = "d697f38c-567a-4daf-bfb2-d89114787c3f",
                             Email = "Admin@elakil.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ELAKIL.COM",
                             NormalizedUserName = "ADMIN@ELAKIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFuCdF9YS1omzkH8AoDFrzynSJKRPqcN1Um1dVpNRWIu9iQ9oo9uTGSlKYWRmNFJIg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFvepH8LVn9Kx/QxTIKtfVz9av+6JFVFMLqzU7WeUfrKlECdVB9mp6QVcch6csslWQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "40a744e9-4eb5-44ff-9bd8-cd6017255fde",
+                            SecurityStamp = "ffb6b590-0806-498d-b850-9ae2f40d51ba",
                             TwoFactorEnabled = false,
                             UserName = "Admin@elakil.com"
                         });
@@ -475,6 +477,15 @@ namespace ELAKIL.Business.Migrations
                     b.Navigation("Meal");
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("ELAKIL.Business.Entities.UserCartItem", b =>
+                {
+                    b.HasOne("ELAKIL.Business.Entities.Meal", "Meal")
+                        .WithMany()
+                        .HasForeignKey("MealId");
+
+                    b.Navigation("Meal");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

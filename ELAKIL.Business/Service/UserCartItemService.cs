@@ -55,7 +55,7 @@ namespace ELAKIL.Business.Service
 
         public async Task<IEnumerable<UserCartItem>> GetUserCartItemsAsync(int userProfileId)
         {
-            return await _context.UserCartItems.Where(a => a.UserID == userProfileId).ToListAsync();
+            return await _context.UserCartItems.Include(a=>a.Meal).Where(a => a.UserID == userProfileId).ToListAsync();
         }
     }
 }

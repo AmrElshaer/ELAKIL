@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELAKIL.Business.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210907153743_AddedMtoNTableUserCartItem")]
-    partial class AddedMtoNTableUserCartItem
+    [Migration("20210908142517_Update_itemCart")]
+    partial class Update_itemCart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,10 +31,16 @@ namespace ELAKIL.Business.Migrations
                     b.Property<string>("AboutUs")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FaceBook")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
@@ -177,13 +183,15 @@ namespace ELAKIL.Business.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MealID")
+                    b.Property<int?>("MealId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("MealId");
 
                     b.ToTable("UserCartItems");
                 });
@@ -335,15 +343,15 @@ namespace ELAKIL.Business.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c80defda-a5c5-4b69-b255-8b440af68b17",
+                            ConcurrencyStamp = "d697f38c-567a-4daf-bfb2-d89114787c3f",
                             Email = "Admin@elakil.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ELAKIL.COM",
                             NormalizedUserName = "ADMIN@ELAKIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPuUTlbgESUuU/vlPLH9ENx5X9zngznTLDH7tV1ktuZiMHqnVm6WoGFkDfaEH37wGQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFvepH8LVn9Kx/QxTIKtfVz9av+6JFVFMLqzU7WeUfrKlECdVB9mp6QVcch6csslWQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "087e0ef3-63c1-44a5-a404-cc4483b43e6e",
+                            SecurityStamp = "ffb6b590-0806-498d-b850-9ae2f40d51ba",
                             TwoFactorEnabled = false,
                             UserName = "Admin@elakil.com"
                         });
@@ -471,6 +479,15 @@ namespace ELAKIL.Business.Migrations
                     b.Navigation("Meal");
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("ELAKIL.Business.Entities.UserCartItem", b =>
+                {
+                    b.HasOne("ELAKIL.Business.Entities.Meal", "Meal")
+                        .WithMany()
+                        .HasForeignKey("MealId");
+
+                    b.Navigation("Meal");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

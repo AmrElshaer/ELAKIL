@@ -2,7 +2,7 @@
 
 namespace ELAKIL.Business.Migrations
 {
-    public partial class AddedMtoNTableUserCartItem : Migration
+    public partial class Update_itemCart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,17 @@ namespace ELAKIL.Business.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: false),
-                    MealID = table.Column<int>(type: "int", nullable: false)
+                    MealId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserCartItems", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_UserCartItems_Meals_MealId",
+                        column: x => x.MealId,
+                        principalTable: "Meals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.UpdateData(
@@ -25,7 +31,12 @@ namespace ELAKIL.Business.Migrations
                 keyColumn: "Id",
                 keyValue: "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "c80defda-a5c5-4b69-b255-8b440af68b17", "AQAAAAEAACcQAAAAEPuUTlbgESUuU/vlPLH9ENx5X9zngznTLDH7tV1ktuZiMHqnVm6WoGFkDfaEH37wGQ==", "087e0ef3-63c1-44a5-a404-cc4483b43e6e" });
+                values: new object[] { "d697f38c-567a-4daf-bfb2-d89114787c3f", "AQAAAAEAACcQAAAAEFvepH8LVn9Kx/QxTIKtfVz9av+6JFVFMLqzU7WeUfrKlECdVB9mp6QVcch6csslWQ==", "ffb6b590-0806-498d-b850-9ae2f40d51ba" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCartItems_MealId",
+                table: "UserCartItems",
+                column: "MealId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -38,7 +49,7 @@ namespace ELAKIL.Business.Migrations
                 keyColumn: "Id",
                 keyValue: "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "2dfce8b7-c0aa-4592-a703-4a5af2450b81", "AQAAAAEAACcQAAAAEHUSNzqURDr8lstYaS22sTpbdl4q8fNskb9Au6qhxBIu3xmK6tuO4HtaXlXZ5YfWQw==", "dcf0daa1-a58d-43a6-9827-fe23b6be8ed6" });
+                values: new object[] { "2999e179-e26c-4fd2-8e46-1c36faa5a0f1", "AQAAAAEAACcQAAAAEFuCdF9YS1omzkH8AoDFrzynSJKRPqcN1Um1dVpNRWIu9iQ9oo9uTGSlKYWRmNFJIg==", "40a744e9-4eb5-44ff-9bd8-cd6017255fde" });
         }
     }
 }
