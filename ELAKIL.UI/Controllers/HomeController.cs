@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
+using ELAKIL.Business.Common;
 
 namespace ELAKIL.UI.Controllers
 {
@@ -30,49 +32,43 @@ namespace ELAKIL.UI.Controllers
         {
             return View();
         }
-
+        [Authorize]
         // TODO by Ahmed Mansour Add To Cart Action
         // Should add to user's cart and do nothing
-        public IActionResult AddItemToCart(int Id)
+        public async Task<IActionResult> AddItemToCart(int Id)
         {
             var userId = _userProfileService.GetUserProfileId(User.Identity.Name);
-            _userCartItemService.AddUserCartItemAsync(new UserCartItem
+            await  _userCartItemService.AddUserCartItemAsync(new UserCartItem
             {
                 MealID = Id,
                 UserID = userId
             });
             return View(viewName: "Index");
         }
-
-        public IActionResult DeleteItemFromCart(int Id, int UId)
+        [Authorize]
+        public async Task<IActionResult> DeleteItemFromCart(int Id, int UId)
         {
-            _userCartItemService.DeleteUserCartItemAsync(Id);
-            Thread.Sleep(500);
+            await _userCartItemService.DeleteUserCartItemAsync(Id);
             return RedirectToAction("CheckOut", new { Id = UId });
         }
-
+        [Authorize]
         // TODO by Ahmed Yahia Checkout Action
         // Should finish all items added to user
         // Make the VIEW and COMPLETE Order
-        public IActionResult CheckOut(int Id)
+        public async Task< IActionResult> CheckOut(int id)
         {
-            var AllMeals = _userCartItemService.GetUserCartItemsAsync()
-                .Result.Where(x => x.UserID == Id).ToList();
-            return View(AllMeals);
+            var allMeals = await _userCartItemService.GetUserCartItemsAsync(id);
+            return View(allMeals);
         }
 
         [HttpPost]
-        public IActionResult CheckOut(Order order)
+        public async Task<IActionResult> CheckOut(Order order)
         {
-            _orderService.AddOrderAsync(order);
-            Thread.Sleep(500);
-            var countAllMeals = _userCartItemService.GetUserCartItemsAsync().Result
-                .Where(x => x.UserID == order.UserProfileId).ToList();
-            for (int i = 0; i < countAllMeals.Count; i++)
-            {
-                _userCartItemService.DeleteUserCartItemAsync(countAllMeals[i].ID);
-                Thread.Sleep(500);
-            }
+            order.Status = OrderStatus.Active.ToString();
+            var allMeals =await _userCartItemService.GetUserCartItemsAsync(order.UserProfileId);
+            order.OrderLines = allMeals.Select(a=>new OrderLine() { MealId=a.MealID,Quantity=1}).ToList();
+             await _orderService.AddOrderAsync(order);
+            allMeals.ToList().ForEach(a=> _userCartItemService.DeleteUserCartItemAsync(a.ID).GetAwaiter().GetResult());
             return RedirectToAction("Index");
         }
 

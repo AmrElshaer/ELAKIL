@@ -2,6 +2,7 @@
 using ELAKIL.Business.Entities;
 using ELAKIL.Business.IService;
 using ELAKIL.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rotativa.AspNetCore;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ELAKIL.UI.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IOrderService _orderService;

@@ -4,6 +4,7 @@ using ELAKIL.Business.IService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,16 +23,15 @@ namespace ELAKIL.Business.Service
         {
             if (userCartItem is null)
                 throw new ArgumentNullException();
-            _context.UserCartItems.Add(userCartItem);
-            _context.SaveChanges();
+            await  _context.UserCartItems.AddAsync(userCartItem);
+            await _context.SaveChangesAsync();
             return userCartItem.ID;
         }
 
-        public void DeleteUserCartItemAsync(int id)
+        public async Task DeleteUserCartItemAsync(int id)
         {
-            _context.UserCartItems.Attach(GetUserCartItemAsync(id).Result);
-            _context.UserCartItems.Remove(GetUserCartItemAsync(id).Result);
-            _context.SaveChangesAsync();
+            _context.UserCartItems.Remove(await GetUserCartItemAsync(id));
+            await _context.SaveChangesAsync();
         }
 
         public async Task<int> EditUserCartItemAsync(UserCartItem userCartItem)
@@ -51,9 +51,11 @@ namespace ELAKIL.Business.Service
             return mel;
         }
 
-        public async Task<IEnumerable<UserCartItem>> GetUserCartItemsAsync()
+       
+
+        public async Task<IEnumerable<UserCartItem>> GetUserCartItemsAsync(int userProfileId)
         {
-            return await _context.UserCartItems.ToListAsync();
+            return await _context.UserCartItems.Where(a => a.UserID == userProfileId).ToListAsync();
         }
     }
 }

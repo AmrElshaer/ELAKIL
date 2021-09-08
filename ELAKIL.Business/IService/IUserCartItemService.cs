@@ -8,10 +8,10 @@ namespace ELAKIL.Business.IService
 {
     public interface IUserCartItemService
     {
-        Task<IEnumerable<UserCartItem>> GetUserCartItemsAsync();
+        Task<IEnumerable<UserCartItem>> GetUserCartItemsAsync(int userProfileId);
         Task<int> AddUserCartItemAsync(UserCartItem userCartItem);
         Task<int> EditUserCartItemAsync(UserCartItem userCartItem);
-        void DeleteUserCartItemAsync(int id);
+        Task DeleteUserCartItemAsync(int id);
         Task<UserCartItem> GetUserCartItemAsync(int id);
     }
 }
