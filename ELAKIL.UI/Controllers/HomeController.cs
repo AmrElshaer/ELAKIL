@@ -72,10 +72,9 @@ namespace ELAKIL.UI.Controllers
             return RedirectToAction("Index");
         }
 
-        // TODO by Ahmed Nasr Elmasry Item Details Action
+        // TODO by Ahmed Nasr Elmasry ==> Ahmed Mansour Item Details Action
         // Should display item details
         // Make the VIEW
-        [HttpPost]
         public IActionResult ItemDetail(int Id)
         {
             return View();

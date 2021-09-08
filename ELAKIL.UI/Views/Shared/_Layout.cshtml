@@ -95,11 +95,10 @@
                 </ul>
 
                 <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-
-            @if (controllerName != "Identity")
+            </nav>
+            <!--if (controllerName != "Identity")
             {
-                @Html.ActionLink(linkText: "Book a table", actionName: "Index", controllerName: "Home",
+                Html.ActionLink(linkText: "Book a table", actionName: "Index", controllerName: "Home",
                 protocol: null, hostname: null, fragment: "book-a-table",
                 routeValues: null, htmlAttributes: new Dictionary<string, object> { { "class", "book-a-table-btn scrollto d-none d-lg-flex" } })
             }
@@ -107,8 +106,8 @@
             {
                 <a class="book-a-table-btn scrollto d-none d-lg-flex" asp-area="" 
                    asp-fragment="book-a-table" asp-controller="Home" asp-action="Index">Book a table</a>
-            }
-
+            }-->
+            <a class="book-a-table-btn scrollto d-none d-lg-flex" href="/Home/Index#book-a-table">Book a table</a>
         </div>
     </header><!-- End Header -->
     <main>
