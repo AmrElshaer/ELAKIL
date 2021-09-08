@@ -77,7 +77,7 @@
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
             <h1 class="logo me-auto me-lg-0">
-                <a href="/Home/Index">Restaurantly</a>
+                <a href="/Home/Index">Elakil</a>
             </h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -108,7 +108,10 @@
                 <a class="book-a-table-btn scrollto d-none d-lg-flex" asp-area="" 
                    asp-fragment="book-a-table" asp-controller="Home" asp-action="Index">Book a table</a>
             }-->
-            <a class="book-a-table-btn scrollto d-none d-lg-flex" href="/Home/Index#book-a-table">Book a table</a>
+            <div class="d-flex">
+                <partial name="_Checkout" />
+                <a class="book-a-table-btn scrollto d-none d-lg-flex" href="/Home/Index#book-a-table">Book a table</a>
+            </div>
         </div>
     </header><!-- End Header -->
     <main>

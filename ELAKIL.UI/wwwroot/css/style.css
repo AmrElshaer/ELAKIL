@@ -209,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Book a table button Menu
 --------------------------------------------------------------*/
-.book-a-table-btn {
+/*.book-a-table-btn {
   margin: 0 0 0 15px;
   border: 2px solid #cda45e;
   color: #fff;
@@ -225,6 +225,57 @@ h1, h2, h3, h4, h5, h6 {
 .book-a-table-btn:hover {
   background: #cda45e;
   color: #fff;
+}*/
+
+.book-a-table-btn {
+    margin: 0 0 0 10px;
+    border: 2px solid #cda45e;
+    color: #cda45e;
+    border-radius: 4px;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    font-size: 12pt;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.book-a-table-btn:hover {
+    background: #cda45e;
+    color: #fff;
+}
+
+.cart-btn {
+    border-radius: 4px;
+    padding: 5px 10px 7px;
+    border: 2px solid #cda45e;
+}
+
+.cart-btn i {
+    font-size: 14pt;
+    margin: 0 5px 0 0;
+    color: #cda45e;
+}
+
+.cart-btn span {
+    font-size: 10pt;
+    color: black;
+    margin: 0 0 0 0;
+    background-color: #cda45e;
+}
+
+.cart-btn:hover {
+    background: #cda45e;
+    color: #fff;
+}
+
+.cart-btn:hover i {
+    color: #fff;
+}
+
+.cart-btn:hover span {
+    background-color: #fff;
+    color: #cda45e;
 }
 
 @media (max-width: 992px) {
