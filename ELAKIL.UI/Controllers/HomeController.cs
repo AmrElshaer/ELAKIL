@@ -19,13 +19,15 @@ namespace ELAKIL.UI.Controllers
         private readonly IUserCartItemService _userCartItemService;
         private readonly IUserProfileService _userProfileService;
         private readonly IOrderService _orderService;
+        private readonly IMealService _mealService;
 
         public HomeController(IUserCartItemService userCartItemService, IUserProfileService userProfileService
-            , IOrderService orderService)
+            , IOrderService orderService, IMealService mealService)
         {
             _userCartItemService = userCartItemService;
             _userProfileService = userProfileService;
             _orderService = orderService;
+            _mealService = mealService;
         }
 
         public IActionResult Index()
@@ -75,9 +77,10 @@ namespace ELAKIL.UI.Controllers
         // TODO by Ahmed Nasr Elmasry ==> Ahmed Mansour Item Details Action
         // Should display item details
         // Make the VIEW
-        public IActionResult ItemDetail(int Id)
+        public async Task<IActionResult> ItemDetail(int Id)
         {
-            return View();
+            var model = await _mealService.GetMealAsync(Id);
+            return View(model);
         }
     }
 }

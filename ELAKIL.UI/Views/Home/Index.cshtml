@@ -68,7 +68,7 @@
                         foreach (var item in myM)
                         {
                             <div class="col-lg-6 menu-item filter-@cats[item.CategoryId].ToLower()">
-                                <img src="/img/menu/lobster-roll.jpg" class="menu-img" alt="">
+                                <img src="@item.Image" class="menu-img" alt="">
                                 <div class="menu-content">
                                     <a asp-route-Id="@item.Id" asp-action="ItemDetail">@item.Name</a><span>$@item.Price</span>
                                 </div>

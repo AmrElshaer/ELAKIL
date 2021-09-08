@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject ELAKIL.Business.IService.IAboutService _aboutService
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -152,17 +154,25 @@
                         <div class="footer-info">
                             <h3>Restaurantly</h3>
                             <p>
-                                A108 Adam Street <br>
-                                NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                                @{var allData = (await _aboutService.GetAboutAsync());}
+                                @{string[] locSplit = allData.Location.Split(' ');}
+                                @for (int i = 0; i < 2; i++)
+                                {
+                                    <span>@locSplit[i]</span>
+                                } <br>
+                                @for (int i = 3; i < locSplit.Length; i++)
+                                {
+                                    <span>@locSplit[i]</span>
+                                }<br><br>
+                                <strong>Phone:</strong> @allData.Number<br>
+                                <strong>Email:</strong> @allData.Email<br>
                             </p>
                             <div class="social-links mt-3">
-                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                <a href="https://www.@allData.Twitter" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="https://www.@allData.FaceBook" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="https://www.@allData.FaceBook" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="https://www.@allData.Twitter" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                <a href="https://www.@allData.FaceBook" class="linkedin"><i class="bx bxl-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -211,7 +221,7 @@
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
             </div>
         </div>
     </footer><!-- End Footer -->
