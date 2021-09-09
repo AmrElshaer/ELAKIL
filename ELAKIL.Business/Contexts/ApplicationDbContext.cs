@@ -3,11 +3,6 @@ using ELAKIL.Business.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Contexts
 {
@@ -17,6 +12,7 @@ namespace ELAKIL.Business.Contexts
          : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             string ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
@@ -51,6 +47,7 @@ namespace ELAKIL.Business.Contexts
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Meal> Meals { get; set; }

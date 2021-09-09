@@ -45,11 +45,11 @@
                     @Html.DisplayNameFor(model => model.Category)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CategoryId)
+                    @Html.DisplayFor(model => model.Category.Name)
                 </dd>
             </dl>
             <div style="padding: 0px 24px 0px 24px;">
-                <a asp-action="Index">Back to Home page</a>
+                <a asp-action="Index"><i class="bi bi-arrow-left"></i> Go Back</a>
                 <br />
             </div>
         </div>

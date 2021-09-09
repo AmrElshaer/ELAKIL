@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ELAKIL.Business.Entities
+﻿namespace ELAKIL.Business.Entities
 {
     public class UserCartItem
     {

@@ -63,15 +63,6 @@
             </div>
         </div>
     </div>
-
-    @{var controllerName = string.Empty; }
-    @{object controllerObj; }
-
-    @if (ViewContext.RouteData.Values.TryGetValue("area", out controllerObj))
-    {
-        controllerName = controllerObj.ToString();
-    }
-
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-cente">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
@@ -97,17 +88,7 @@
 
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
-            <!--if (controllerName != "Identity")
-            {
-                Html.ActionLink(linkText: "Book a table", actionName: "Index", controllerName: "Home",
-                protocol: null, hostname: null, fragment: "book-a-table",
-                routeValues: null, htmlAttributes: new Dictionary<string, object> { { "class", "book-a-table-btn scrollto d-none d-lg-flex" } })
-            }
-            else
-            {
-                <a class="book-a-table-btn scrollto d-none d-lg-flex" asp-area="" 
-                   asp-fragment="book-a-table" asp-controller="Home" asp-action="Index">Book a table</a>
-            }-->
+         
             <div class="d-flex">
                 <partial name="_Checkout" />
                 <a class="book-a-table-btn scrollto d-none d-lg-flex" href="/Home/Index#book-a-table">Book a table</a>
@@ -115,36 +96,7 @@
         </div>
     </header><!-- End Header -->
     <main>
-        @if (controllerName == "Identity")
-        {
-            <section id="hero" class="d-flex align-items-center btn-">
-                <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="row">
-                        <div id="scoped-content">
-                            <style>
-                                .btn-warning {
-                                    color: white;
-                                    font-size: 20px;
-                                }
-                            </style>
-                            @RenderBody()
-                            <script>
-                                var buttons = document.getElementsByTagName('button');
-                                len = buttons !== null ? buttons.length : 0;
-                                i = 0;
-                                for (i; i < len; i++) {
-                                    buttons[i].className = " btn btn-warning";
-                                }
-                            </script>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        }
-        else
-        {
             @RenderBody()
-        }
     </main>
     <!-- ======= Footer ======= -->
     <footer id="footer">

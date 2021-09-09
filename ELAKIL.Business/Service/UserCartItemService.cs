@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Service
@@ -23,7 +22,7 @@ namespace ELAKIL.Business.Service
         {
             if (userCartItem is null)
                 throw new ArgumentNullException();
-            await  _context.UserCartItems.AddAsync(userCartItem);
+            await _context.UserCartItems.AddAsync(userCartItem);
             await _context.SaveChangesAsync();
             return userCartItem.ID;
         }
@@ -51,11 +50,9 @@ namespace ELAKIL.Business.Service
             return mel;
         }
 
-       
-
         public async Task<IEnumerable<UserCartItem>> GetUserCartItemsAsync(int userProfileId)
         {
-            return await _context.UserCartItems.Include(a=>a.Meal).Where(a => a.UserID == userProfileId).ToListAsync();
+            return await _context.UserCartItems.Include(a => a.Meal).Where(a => a.UserID == userProfileId).ToListAsync();
         }
     }
 }
