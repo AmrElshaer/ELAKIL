@@ -107,7 +107,10 @@
                                             <td><img style="max-width:80px" class="rounded" src="@arrModel[i].Meal.Image" alt=""> <span>@arrModel[i].Meal.Name</span> </td>
                                             <!-- Make it dynamic amount of item -->
                                             <td>@arrModel[i].Meal.Price.ToString("n2")</td>
-                                            <td><input name="OrderLines[@i].Quantity" type="number" value="@arrModel[i].Quantity"/></td>
+                                            <td><input name="OrderLines[@i].Quantity" id="inputQuan" type="number" value="@arrModel[i].Quantity" />
+                                            <a href="Home/EditQuantity/@arrModel[i].Quantity" ></a>
+                                            </td>
+                                            
                                             <td>
                                                 <a asp-action="DeleteItemFromCart" asp-route-Id="@arrModel[i].ID" asp-route-UId="@arrModel[i].UserID">
                                                     <i class="bi bi-trash"></i>
@@ -133,7 +136,9 @@
                                     <div class="form-group row">
                                         <label class="col-md-2 col-form-label">Total</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="text" readonly value="@(Model.Sum(a=>a.Meal.Price).ToString("n2"))" />
+                                            
+                                            <input class="form-control" type="text" readonly value="@(Model.Sum(a=>a.Meal.Price*a.Quantity).ToString("n2"))" />
+                                        
                                         </div>
 
                                     </div>
@@ -157,4 +162,14 @@
             </div>
         </div>
     </section>
+    <script>
+        var element = document.getElementById("inputQuan");
+        element.addEventListener("blur", Function(e){
+
+            element.setAttribut("href", "Home/EditQuantity/" + element.value)
+
+        })
+
+
+    </script>
 </main>

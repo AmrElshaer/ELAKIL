@@ -37,14 +37,17 @@ namespace ELAKIL.UI.Controllers
         [Authorize]
         // TODO by Ahmed Mansour Add To Cart Action
         // Should add to user's cart and do nothing
-        public async Task<IActionResult> AddItemToCart(int id)
+        [HttpPost]
+        public async Task<IActionResult> AddItemToCart(int id,int quantinty=1)
         {
             var userId =await _userProfileService.GetUserProfileIdAsync(User.Identity.Name);
             await  _userCartItemService.AddUserCartItemAsync(new UserCartItem
             {
                 MealId = id,
-                UserID = userId
+                Quantity = quantinty,
+                UserID = userId     
             });
+            
             return View(viewName: "Index");
         }
         [Authorize]
@@ -60,6 +63,7 @@ namespace ELAKIL.UI.Controllers
         public async Task< IActionResult> CheckOut(int id)
         {
             var allMeals = await _userCartItemService.GetUserCartItemsAsync(id);
+           
             return View(allMeals);
         }
 
@@ -79,6 +83,7 @@ namespace ELAKIL.UI.Controllers
         public async Task<IActionResult> ItemDetail(int Id)
         {
             var model = await _mealService.GetMealAsync(Id);
+         
             return View(model);
         }
     }

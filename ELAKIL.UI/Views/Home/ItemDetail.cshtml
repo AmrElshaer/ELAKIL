@@ -1,4 +1,5 @@
 ﻿@model ELAKIL.Business.Entities.Meal
+@inject IMealService mealService
 
 <div class="mt-5 container">
     <div class="mt-5 container">
@@ -55,5 +56,45 @@
         <div class="col-4">
             <img src="@Html.DisplayFor(model => model.Image)" />
         </div>
+
+        <form action="/Home/AddItemToCart/" method="post">
+            <input name="id" type="hidden" value="@Model.Id" />
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th></th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+
+                        <!-- Make it dynamic amount of item -->
+                        <td name="id">@Model.Price</td>
+
+                        <td><input name="quantinty" type="number" id="qu" /></td>
+                        
+
+                        <td><button type="submit" class="btn btn-warning">Add To Chart</button></td>
+
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </form>
+
     </div>
 </div>
+<script>
+    function getInputValue() {
+        // Selecting the input element and get its value
+        var inputVal = document.getElementById("qu").value;
+       
+    }
+</script>
