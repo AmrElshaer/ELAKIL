@@ -7,23 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELAKIL.Business.Contexts;
 using ELAKIL.Business.Entities;
+using ELAKIL.Business.IService;
 
 namespace ELAKIL.UI.Controllers
 {
     public class MealsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IMealService _mealService;
 
-        public MealsController(ApplicationDbContext context)
+        public MealsController(IMealService mealService)
         {
-            _context = context;
+            _mealService = mealService;
         }
 
         // GET: Meals
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Meals.Include(m => m.Category);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _mealService.GetMealsAsync());
         }
 
         // GET: Meals/Details/5
@@ -33,22 +33,12 @@ namespace ELAKIL.UI.Controllers
             {
                 return NotFound();
             }
-
-            var meal = await _context.Meals
-                .Include(m => m.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (meal == null)
-            {
-                return NotFound();
-            }
-
-            return View(meal);
+            return View(await _mealService.GetMealAsync(id.Value));
         }
 
         // GET: Meals/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
             return View();
         }
 
@@ -61,11 +51,9 @@ namespace ELAKIL.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(meal);
-                await _context.SaveChangesAsync();
+                await _mealService.AddMealAsync(meal);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", meal.CategoryId);
             return View(meal);
         }
 
@@ -76,14 +64,7 @@ namespace ELAKIL.UI.Controllers
             {
                 return NotFound();
             }
-
-            var meal = await _context.Meals.FindAsync(id);
-            if (meal == null)
-            {
-                return NotFound();
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", meal.CategoryId);
-            return View(meal);
+            return View(await _mealService.GetMealAsync(id.Value));
         }
 
         // POST: Meals/Edit/5
@@ -100,25 +81,9 @@ namespace ELAKIL.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(meal);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MealExists(meal.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _mealService.EditMealAsync(meal);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", meal.CategoryId);
             return View(meal);
         }
 
@@ -129,16 +94,7 @@ namespace ELAKIL.UI.Controllers
             {
                 return NotFound();
             }
-
-            var meal = await _context.Meals
-                .Include(m => m.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (meal == null)
-            {
-                return NotFound();
-            }
-
-            return View(meal);
+            return View(await _mealService.GetMealAsync(id.Value));
         }
 
         // POST: Meals/Delete/5
@@ -146,15 +102,8 @@ namespace ELAKIL.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var meal = await _context.Meals.FindAsync(id);
-            _context.Meals.Remove(meal);
-            await _context.SaveChangesAsync();
+            await _mealService.DeleteMealAsync(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool MealExists(int id)
-        {
-            return _context.Meals.Any(e => e.Id == id);
         }
     }
 }
