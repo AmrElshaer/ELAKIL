@@ -80,7 +80,7 @@ namespace ELAKIL.UI.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
                     await  _userProfileService.AddUserProfileAsync(new UserProfile{Name=Input.Email,IdentityId=user.Id});
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    return LocalRedirect("/");
                     
                 }
                 foreach (var error in result.Errors)
