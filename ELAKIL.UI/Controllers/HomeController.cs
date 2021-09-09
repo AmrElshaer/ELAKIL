@@ -34,9 +34,26 @@ namespace ELAKIL.UI.Controllers
         {
             return View();
         }
-        [Authorize]
+
         // TODO by Ahmed Mansour Add To Cart Action
         // Should add to user's cart and do nothing
+        [Authorize]
+        public async Task<IActionResult> AddItemToCart(int id)
+        {
+            var userId = await _userProfileService.GetUserProfileIdAsync(User.Identity.Name);
+            await _userCartItemService.AddUserCartItemAsync(new UserCartItem
+            {
+                MealId = id,
+                Quantity = 1,
+                UserID = userId
+            });
+
+            return View(viewName: "Index");
+        }
+
+        // TODO by Ahmed Mansour Add To Cart Action
+        // Should add to user's cart and do nothing
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddItemToCart(int id,int quantinty=1)
         {
@@ -50,21 +67,34 @@ namespace ELAKIL.UI.Controllers
             
             return View(viewName: "Index");
         }
+
         [Authorize]
         public async Task<IActionResult> DeleteItemFromCart(int Id, int UId)
         {
             await _userCartItemService.DeleteUserCartItemAsync(Id);
             return RedirectToAction("CheckOut", new { Id = UId });
         }
+
         [Authorize]
         // TODO by Ahmed Yahia Checkout Action
         // Should finish all items added to user
         // Make the VIEW and COMPLETE Order
-        public async Task< IActionResult> CheckOut(int id)
+        public async Task<IActionResult> CheckOut(int id)
         {
             var allMeals = await _userCartItemService.GetUserCartItemsAsync(id);
            
             return View(allMeals);
+        }
+
+        // By Ahmed Elnasr and Ahmed Mansour
+        // Validate new quantity of order
+        [Authorize]
+        public async Task<IActionResult> EditQuantity(int quantity, int uid, int mid)
+        {
+            var myMeal = await _userCartItemService.GetUserCartItemAsync(mid);
+            myMeal.Quantity = quantity;
+            await _userCartItemService.EditUserCartItemAsync(myMeal);
+            return RedirectToAction("CheckOut", new { id = uid });
         }
 
         [HttpPost]

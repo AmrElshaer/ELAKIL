@@ -37,6 +37,7 @@ namespace ELAKIL.Business.Service
         {
             if (userCartItem is null)
                 throw new ArgumentNullException($"Entity UserCartItem {userCartItem.ID} Not Found");
+            _context.UserCartItems.Attach(userCartItem);
             _context.UserCartItems.Update(userCartItem);
             await _context.SaveChangesAsync();
             return userCartItem.ID;
