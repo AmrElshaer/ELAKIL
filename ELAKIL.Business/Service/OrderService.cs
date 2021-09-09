@@ -35,7 +35,7 @@ namespace ELAKIL.Business.Service
                 .Where(o => o.UserProfileId == userId)
                 .Include(o => o.UserProfile)
                 .Include(o => o.OrderLines)
-                .ThenInclude(ol => ol.Meal)
+                .ThenInclude(ol => ol.Meal).OrderByDescending(a=>a.Id)
                 .ToListAsync();
         }
 
