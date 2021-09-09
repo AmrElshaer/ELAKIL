@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Meals";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container" data-aos="fade-up">
@@ -52,7 +51,7 @@
                             }
                             @if (item.Image != null)
                             {
-                                <img src="@item.Image" class="testimonial-img" alt="">
+                                <img src="@item.Image" style="max-height:200px" class="testimonial-img" alt="">
                             }
                             @if (item.Price != 0.0)
                             {
