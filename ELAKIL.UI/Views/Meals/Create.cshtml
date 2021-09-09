@@ -1,0 +1,95 @@
+﻿@model ELAKIL.Business.Entities.Meal
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mt-5 container">
+    <div class="mt-5 container">
+        <br />
+        <br />
+    </div>
+</div>
+<div class="mt-5 container">
+    <hr />
+    <div class="row container">
+        <div class="col-12">
+            <h1>Create</h1>
+
+            <h4>Meal</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label asp-for="Image" class="control-label"></label>
+                            <input type="hidden" asp-for="Image" />
+                            <input type="file" accept="image/*" onchange="handleInputChange(event)" class="form-control custom-file-input" />
+                                    
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>    
+
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+           
+                <script>
+                    $(document).ready(function () {
+                        $(".custom-file-input").on("change",
+                            function () {
+
+                                var filename = $(this).val().split('\\').pop();
+                                $(this).next('.custom-file-label').html(filename);
+
+                            });
+                    });
+                    function handleInputChange(imageInput) {
+                        const file = imageInput.dataTransfer ? imageInput.dataTransfer.files[0] : imageInput.target.files[0];
+                        const reader = new FileReader();
+                        reader.onload = this._handleReaderLoaded.bind(this);
+                        reader.readAsDataURL(file);
+                    }
+                    function _handleReaderLoaded(e) {
+                        const reader = e.target;
+                        $("#Image").val(reader.result);
+                        $("#ImageViewer").attr("src", reader.result);
+                    }
+                </script>
+            }
+
+        </div>
+    </div>
+</div>
+
+
