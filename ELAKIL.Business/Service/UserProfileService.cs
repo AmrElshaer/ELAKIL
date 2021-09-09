@@ -3,14 +3,11 @@ using ELAKIL.Business.Entities;
 using ELAKIL.Business.IService;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Service
 {
-    public class UserProfileService:IUserProfileService
+    public class UserProfileService : IUserProfileService
     {
         private readonly ApplicationDbContext _context;
 
@@ -18,6 +15,7 @@ namespace ELAKIL.Business.Service
         {
             _context = context;
         }
+
         public async Task<int> AddUserProfileAsync(UserProfile userProfile)
         {
             if (userProfile is null)
@@ -29,7 +27,7 @@ namespace ELAKIL.Business.Service
 
         public async Task<int> GetUserProfileIdAsync(string name)
         {
-            var user =await _context.UserProfiles.FirstOrDefaultAsync(a=>a.Name==name);
+            var user = await _context.UserProfiles.FirstOrDefaultAsync(a => a.Name == name);
             if (user is null)
                 throw new ArgumentNullException($"Entity UserProfile {name} Not Found");
             return user.Id;

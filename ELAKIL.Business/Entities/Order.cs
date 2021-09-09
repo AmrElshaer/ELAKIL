@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Entities
 {
@@ -12,6 +9,7 @@ namespace ELAKIL.Business.Entities
         {
             OrderLines = new HashSet<OrderLine>();
         }
+
         public int Id { get; set; }
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }

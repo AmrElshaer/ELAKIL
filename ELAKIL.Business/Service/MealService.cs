@@ -4,7 +4,6 @@ using ELAKIL.Business.IService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Service
@@ -44,7 +43,7 @@ namespace ELAKIL.Business.Service
 
         public async Task<Meal> GetMealAsync(int id)
         {
-            var mel = await _context.Meals.Include(a=>a.Category).FirstOrDefaultAsync(a=>a.Id==id);
+            var mel = await _context.Meals.Include(a => a.Category).FirstOrDefaultAsync(a => a.Id == id);
             if (mel is null)
                 throw new ArgumentNullException($"Entity Meal {id} Not Found");
             return mel;

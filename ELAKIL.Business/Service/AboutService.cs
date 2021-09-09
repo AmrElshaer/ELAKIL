@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ELAKIL.Business.IService;
-using ELAKIL.Business.Contexts;
+﻿using ELAKIL.Business.Contexts;
 using ELAKIL.Business.Entities;
-using System.Threading.Tasks;
-using System.Linq;
+using ELAKIL.Business.IService;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Service
 {
     public class AboutService : IAboutService
     {
         private ApplicationDbContext context;
-        
+
         public AboutService(ApplicationDbContext context)
         {
             this.context = context;

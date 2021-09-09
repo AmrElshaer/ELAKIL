@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace ELAKIL.Business
 {
     public static class DependencyInjection
@@ -21,7 +22,8 @@ namespace ELAKIL.Business
             // Config Fluent Validation
             AssemblyScanner.FindValidatorsInAssembly(typeof(CategoryValidator).Assembly)
              .ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
-            services.Configure<IdentityOptions>(opts => {
+            services.Configure<IdentityOptions>(opts =>
+            {
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 8;
                 opts.Password.RequireNonAlphanumeric = false;

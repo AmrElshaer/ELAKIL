@@ -1,6 +1,5 @@
 ﻿@using ELAKIL.Business.Entities
 @model IEnumerable<Order>
-@inject IOrderService orderService
 @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
 {
 
