@@ -28,6 +28,17 @@ namespace ELAKIL.Business.Service
              (!code.HasValue||a.Id==code.Value)&&
              (user==null||a.UserProfile.Name.ToLower().Contains(user.ToLower()))).ToListAsync();
         }
+
+        public async Task<IEnumerable<Order>> GetOrdersAsync(int userId)
+        {
+            return await _context.Orders
+                .Where(o => o.UserProfileId == userId)
+                .Include(o => o.UserProfile)
+                .Include(o => o.OrderLines)
+                .ThenInclude(ol => ol.Meal)
+                .ToListAsync();
+        }
+
         public async Task<Order> GetOrderAsync(int id)
         {
             return await _context.Orders.Include(a => a.OrderLines).ThenInclude(a => a.Meal)
@@ -52,6 +63,15 @@ namespace ELAKIL.Business.Service
         {
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<double> CalcOrderPriceAsync(int id)
+        {
+            double totalPrice = 0.0;
+            Order order = await GetOrderAsync(id);
+            foreach (OrderLine ol in order.OrderLines)
+                totalPrice += ol.Meal.Price * ol.Quantity;
+            return totalPrice;
         }
     }
 }

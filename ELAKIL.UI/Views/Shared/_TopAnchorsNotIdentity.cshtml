@@ -6,10 +6,6 @@
 protocol: null, hostname: null, fragment: "hero", routeValues: null, htmlAttributes: null)
 </li>
 <li>
-    @Html.ActionLink(linkText: "About", actionName: "Index", controllerName: "About",
-protocol: null, hostname: null, fragment: "", routeValues: null, htmlAttributes: null)
-</li>
-<li>
     @Html.ActionLink(linkText: "Menu", actionName: "Index", controllerName: "Home",
 protocol: null, hostname: null, fragment: "menu", routeValues: null, htmlAttributes: null)
 </li>
@@ -18,10 +14,12 @@ protocol: null, hostname: null, fragment: "menu", routeValues: null, htmlAttribu
 protocol: null, hostname: null, fragment: "specials", routeValues: null, htmlAttributes: null)
 </li>
 <li>
+    @Html.ActionLink(linkText: "My Orders", actionName: "ShowAll", controllerName: "Orders")
+</li>
+<li>
     @Html.ActionLink(linkText: "Contact Us", actionName: "Contact", controllerName: "ContactUs")
 </li>
 <li>
-    <!--{ var myUser = userProfileService.GetUserProfileId(User.Identity.Name);}
-    Html.ActionLink(linkText: "Checkout", actionName: "CheckOut", controllerName: "Home",
-protocol: null, hostname: null, fragment: "", routeValues: myUser, htmlAttributes: null)
-</li>-->
+    @Html.ActionLink(linkText: "About", actionName: "Index", controllerName: "About",
+    protocol: null, hostname: null, fragment: "", routeValues: null, htmlAttributes: null)
+</li>
