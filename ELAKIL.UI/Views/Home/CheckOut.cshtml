@@ -34,7 +34,7 @@
                                         <div class="form-group row" style="display:none">
                                             <label class="col-md-2 col-form-label">User</label>
                                             <div class="col-sm-10">
-                                                <input class="form-control" type="hidden" name="UserProfileId" value="@Model.FirstOrDefault().UserID" />
+                                                <input class="form-control" type="hidden" id="hiddenUID" name="UserProfileId" value="@Model.FirstOrDefault().UserID" />
                                             </div>
 
                                         </div>
@@ -103,12 +103,19 @@
                                         @for (int i = 0; i < arrModel.Length; i++)
                                         {
                                         <tr>
-                                            <td style="display:none"><input name="OrderLines[@i].MealId" value="@arrModel[i].Meal.Id" /></td>
+                                            <td style="display:none">
+                                                <input name="OrderLines[@i].MealId" value="@arrModel[i].Meal.Id" />
+                                            </td>
                                             <td><img style="max-width:80px" class="rounded" src="@arrModel[i].Meal.Image" alt=""> <span>@arrModel[i].Meal.Name</span> </td>
                                             <!-- Make it dynamic amount of item -->
                                             <td>@arrModel[i].Meal.Price.ToString("n2")</td>
-                                            <td><input name="OrderLines[@i].Quantity" id="inputQuan" type="number" value="@arrModel[i].Quantity" />
-                                            <a href="Home/EditQuantity/@arrModel[i].Quantity" ></a>
+                                            <td>
+                                                <input class="col-3 inputQuan" name="OrderLines[@i].Quantity" type="number" value="@arrModel[i].Quantity" />
+                                                <input class="midHidden" type="hidden" value="@arrModel[i].ID" />
+                                                <a class="nav-link scrollto inputAnch" asp-controller="Home" asp-action="EditQuantity"
+                                                   asp-route-quantity="@arrModel[i].Quantity" asp-route-uid="@Model.FirstOrDefault().UserID" asp-route-mid="@arrModel[i].ID">
+                                                    Change Quantity
+                                                </a>
                                             </td>
                                             
                                             <td>
@@ -163,12 +170,23 @@
         </div>
     </section>
     <script>
-        var element = document.getElementById("inputQuan");
-        element.addEventListener("blur", Function(e){
 
-            element.setAttribut("href", "Home/EditQuantity/" + element.value)
+        var element = document.getElementsByClassName("inputQuan");
+        // Function to change the content of t2
+        function setLink() {
+            const myEle = document.getElementsByClassName("inputAnch");
+            const uID = document.getElementById("hiddenUID");
+            const mID = document.getElementsByClassName("midHidden")
+            const baseText = myEle[0].getAttribute("href");
+            for (var i = 0; i < myEle.length; i++) {
+                myEle[i].setAttribute("href", "/Home/EditQuantity?quantity=" + element[i].value + "&uid=" + uID.value + "&mid=" + mID[i].value);
+            }
+            console.log('worked');
+        }
 
-        })
+        for (var i = 0; i < element.length; i++) {
+            element[i].addEventListener("blur", setLink, true);
+        }
 
 
     </script>
