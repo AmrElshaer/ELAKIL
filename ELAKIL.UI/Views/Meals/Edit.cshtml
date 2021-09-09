@@ -1,4 +1,5 @@
 ﻿@model ELAKIL.Business.Entities.Meal
+@inject ELAKIL.Business.IService.ICategoryService _CatService
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,62 +12,79 @@
         <br />
     </div>
 </div>
-<div class="mt-5 container">
-    <hr />
-    <div class="row container">
-        <div class="col-12">
-            <h1>Edit</h1>
+<section class="contact">
+    <div class="container" data-aos="fade-up">
+        <div class="row scoped-content">
+            <style>
+                img {
+                    width: 400px;
+                    height: 400px;
+                }
+            </style>
+            <div class="col-8">
+                <form asp-action="Edit" method="post" class="php-email-form">
 
-            <h4>Meal</h4>
-            <hr />
-            <div class="row">
-                <div class="col-md-4">
-                    <form asp-action="Edit">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Id" />
-                        <div class="form-group">
-                            <label asp-for="Name" class="control-label"></label>
-                            <input asp-for="Name" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input class="form-control" asp-for="Name" placeholder="Meal Name" required />
+                            <span asp-validation-for="Name"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Image" class="control-label"></label>
-                            <input asp-for="Image" class="form-control" />
-                            <span asp-validation-for="Image" class="text-danger"></span>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <div class="custom-file">
+                                <input type="hidden" asp-for="Image" />
+                                <input type="file" accept="image/*" onchange="handleInputChange(event)" class="form-control custom-file-input" />
+                                <label style=" border-radius: 0; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;" class="custom-file-label">Choose Image..</label>
+                            </div>
+                            <span asp-validation-for="Image"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Price" class="control-label"></label>
-                            <input asp-for="Price" class="form-control" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Description" class="control-label"></label>
-                            <input asp-for="Description" class="form-control" />
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="CategoryId" class="control-label"></label>
-                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" asp-for="Description" rows="8" placeholder="Description"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="number" class="form-control" asp-for="Price" rows="1" placeholder="Price"/>
+                        <span asp-validation-for="Price"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        @{ var allCats = await _CatService.GetCategoriesAsync();}
+                        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(allCats, "Id", "Name"))"></select>
+                        <span asp-validation-for="CategoryId"></span>
+                    </div>
+                    <div class="text-center"><button type="submit">Save</button></div>
+                    <a href="/Meals"><i class="bi bi-arrow-left"></i> Go Back</a>
+                </form>
             </div>
-
-            <div>
-                <a asp-action="Index">Back to List</a>
+            <div class="col-4">
+                <img src="@(Model.Image)" id="ImageViewer" />
             </div>
-
-            @section Scripts {
-                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-            }
-
         </div>
+
     </div>
-</div>
+</section>
 
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".custom-file-input").on("change",
+                function () {
 
+                    var filename = $(this).val().split('\\').pop();
+                    $(this).next('.custom-file-label').html(filename);
+
+                });
+        });
+        function handleInputChange(imageInput) {
+            const file = imageInput.dataTransfer ? imageInput.dataTransfer.files[0] : imageInput.target.files[0];
+            const reader = new FileReader();
+            reader.onload = this._handleReaderLoaded.bind(this);
+            reader.readAsDataURL(file);
+        }
+        function _handleReaderLoaded(e) {
+            const reader = e.target;
+            $("#Image").val(reader.result);
+            $("#ImageViewer").attr("src", reader.result);
+        }
+    </script>
+}
 
