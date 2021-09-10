@@ -15,18 +15,25 @@
 
         </div>
     </section>
-
-    <section id="menu" class="menu section-bg container mt-4">
+    <div class="container">
         <div class="row">
+            <div class="col-md-6 m-auto">
+                <input  onchange="searchMeals()" id="searchInput" style="background: #0c0b09; border: 1px solid #ced4da; color: white " type="text" class="form-control" name="mealName" placeholder="Search" />
+            </div>
+        </div>
+    </div>
+    <div class="menu section-bg container">
+        <div class="row">
+            <div id="items" class="row">
 
-            <div id="0" class="menu-item"></div>
+            </div>
             <div class="text-center mt-3">
                 <div id="loadMessage" style="display:none" class="spinner-border text-warning" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </main>
 @section Scripts{ 
     <script>
@@ -34,28 +41,35 @@
             FetchDataFromServer();
             $(window).scroll(function () {
                 if ($(window).scrollTop() ==
-                    $(document).height() -( $(window).height())) {
+                    ($(document).height()) -( $(window).height())) {
                     if ($('#loadMessage').css('display') == 'none') {
-                        FetchDataFromServer();
+                        var pageIndex = $("#items").children().length;
+                        FetchDataFromServer(pageIndex);
                     }
                 }
             });
         });
 
-        function FetchDataFromServer() {
+        function FetchDataFromServer(pageIndex=0) {
             $("#loadMessage").toggle();
-            var id = $(".menu-item:last").attr("id");
+            
+            var searchVal = $("#searchInput").val();
             $.ajax("/Meals/FetchData", {
                 type: "GET",
-                data: { pageIndex: id },
+                data: { pageIndex: pageIndex, search: searchVal },
                 success: function (data) {
-                    $(".menu-item:last").after(data);
+                    $("#items").append(data);
                     $("#loadMessage").toggle();
                 },
                 error: function () {
                     $("#loadMessage").toggle();
                 }
             });
+        }
+        $("#searchInput").on('keyup', searchMeals);
+        function searchMeals() {
+            $("#items").empty();
+            FetchDataFromServer();
         }
     </script>
 

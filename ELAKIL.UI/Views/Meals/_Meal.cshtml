@@ -1,20 +1,18 @@
 ﻿@model IEnumerable<Meal>
-@{ var mels = Model.ToArray();}
-@if (Model.Any())
-{
-    for (int i = 0; i < mels.Length; i++)
+
+    @foreach (var item in Model)
     {
-        <div id="@(i)" class="col-md-6 menu-item" data-aos="fade-up">
-            <img src="@mels[i].Image" style="max-height:200px" class="menu-img" alt="">
+        <div  class="col-md-6 menu-item" data-aos="fade-up">
+            <img src="@item.Image" style="max-height:200px" class="menu-img" alt="">
             <div class="menu-content">
-                <a asp-route-Id="@mels[i].Id" asp-action="ItemDetail">@mels[i].Name</a> <span>@mels[i].Price</span>
+                <a asp-route-Id="@item.Id" asp-action="ItemDetail">@item.Name</a> <span>@item.Price</span>
             </div>
             <div class="menu-ingredients">
-                <div> @mels[i].Description</div>
+                <div> @item.Description</div>
                 @if (!User.IsInRole("Admin"))
                 {
                     <div>
-                        <a class="scrollto badge" style="font-size: 20px; float: right;" rel="Add To Cart" asp-route-Id="@mels[i].Id" asp-action="AddItemToCart"><i class="bi bi-cart"></i></a>
+                        <a class="scrollto badge" style="font-size: 20px; float: right;" rel="Add To Cart" asp-route-Id="@item.Id" asp-action="AddItemToCart"><i class="bi bi-cart"></i></a>
                     </div>
                 }
 
@@ -22,8 +20,5 @@
 
         </div>
     }
-    }
-    else
-    {
-        <h3 class="alert alert-warning">No Meals Added yet</h3>
-    }
+ 
+   

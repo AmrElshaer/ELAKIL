@@ -23,10 +23,9 @@ namespace ELAKIL.UI.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> FetchData(int pageIndex=0)
+        public async Task<IActionResult> FetchData(int pageIndex=0,string search=null)
         {
-            pageIndex = pageIndex != 0 ? pageIndex+1:pageIndex;
-            var meals =await  _mealService.ShowMealsAsync(4,pageIndex);
+            var meals =await  _mealService.ShowMealsAsync(10,pageIndex,search);
             return PartialView("_Meal",meals);
         }
         // GET: Meals
