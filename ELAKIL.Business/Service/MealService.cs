@@ -20,7 +20,7 @@ namespace ELAKIL.Business.Service
         public async Task<IEnumerable<Meal>> ShowMealsAsync(int take,int skip, string search)
         {
             return await _context.Meals.Where(a=> string.IsNullOrEmpty(search)
-            ||a.Name.ToLower().Contains(search.ToLower())).Skip(skip).Take(take).ToListAsync();
+            ||a.Name.ToLower().Contains(search.ToLower())).OrderBy(a=>a.Id).Skip(skip).Take(take).ToListAsync();
         }
         public async Task<int> AddMealAsync(Meal meal)
         {
