@@ -4,6 +4,7 @@ using ELAKIL.Business.IService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ELAKIL.Business.Service
@@ -16,7 +17,10 @@ namespace ELAKIL.Business.Service
         {
             _context = context;
         }
-
+        public async Task<IEnumerable<Meal>> ShowMealsAsync(int take,int skip)
+        {
+            return await _context.Meals.Skip(skip).Take(take).ToListAsync();
+        }
         public async Task<int> AddMealAsync(Meal meal)
         {
             if (meal is null)

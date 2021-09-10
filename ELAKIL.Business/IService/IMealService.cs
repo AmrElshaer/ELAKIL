@@ -15,5 +15,6 @@ namespace ELAKIL.Business.IService
         Task DeleteMealAsync(int id);
 
         Task<Meal> GetMealAsync(int id);
+        Task<IEnumerable<Meal>> ShowMealsAsync(int take, int skip=0);
     }
 }

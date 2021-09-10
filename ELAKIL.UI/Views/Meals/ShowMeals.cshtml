@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Meals";
+}
+<main id="main">
+    <section class="breadcrumbs">
+        <div class="container" data-aos="fade-up">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Meals</h2>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Meals</li>
+                </ol>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="menu" class="menu section-bg container mt-4">
+        <div class="row">
+
+            <div id="0" class="menu-item"></div>
+            <div class="text-center mt-3">
+                <div id="loadMessage" style="display:none" class="spinner-border text-warning" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts{ 
+    <script>
+        $(function () {
+            FetchDataFromServer();
+            $(window).scroll(function () {
+                if ($(window).scrollTop() ==
+                    $(document).height() -( $(window).height())) {
+                    if ($('#loadMessage').css('display') == 'none') {
+                        FetchDataFromServer();
+                    }
+                }
+            });
+        });
+
+        function FetchDataFromServer() {
+            $("#loadMessage").toggle();
+            var id = $(".menu-item:last").attr("id");
+            $.ajax("/Meals/FetchData", {
+                type: "GET",
+                data: { pageIndex: id },
+                success: function (data) {
+                    $(".menu-item:last").after(data);
+                    $("#loadMessage").toggle();
+                },
+                error: function () {
+                    $("#loadMessage").toggle();
+                }
+            });
+        }
+    </script>
+
+}

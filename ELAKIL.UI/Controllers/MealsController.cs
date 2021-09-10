@@ -19,7 +19,16 @@ namespace ELAKIL.UI.Controllers
         {
             _mealService = mealService;
         }
-
+        public IActionResult ShowMeals()
+        {
+            return View();
+        }
+        public async Task<IActionResult> FetchData(int pageIndex=0)
+        {
+            pageIndex = pageIndex != 0 ? pageIndex+1:pageIndex;
+            var meals =await  _mealService.ShowMealsAsync(4,pageIndex);
+            return PartialView("_Meal",meals);
+        }
         // GET: Meals
         public async Task<IActionResult> Index()
         {
