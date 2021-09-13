@@ -1,5 +1,4 @@
 ﻿@model ELAKIL.Business.Entities.Meal
-@inject ELAKIL.Business.IService.ICategoryService _catService
 
 @{
     ViewData["Title"] = "Delete";
@@ -33,7 +32,7 @@
                         <div class="col-lg-6 details order-2 order-lg-1">
                             <h3>@Model.Name</h3>
                             <p class="fst-italic">@Model.Description</p>
-                            <p class="fst-italic">@((await _catService.GetCategoryAsync(Model.CategoryId)).Name)</p>
+                            <p class="fst-italic">@(Model.Category.Name)</p>
                             <p class="fst-italic">$@Model.Price</p>
 
                             <form asp-action="Delete" method="post" class="php-email-form">
