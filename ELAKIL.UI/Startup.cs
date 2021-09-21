@@ -1,21 +1,15 @@
 using ELAKIL.Business;
+using ELAKIL.Business.Common.Models;
+using ELAKIL.Business.IService;
+using ELAKIL.UI.Hubs;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentValidation.AspNetCore;
-using ELAKIL.Business.Common.Models;
-using ELAKIL.Business.IService;
 using Rotativa.AspNetCore;
+using System;
 
 namespace ELAKIL.UI
 {
@@ -45,19 +39,21 @@ namespace ELAKIL.UI
             });
             //Mail Configration
             var mailSetting = Configuration.GetSection(nameof(MailSettings));
-            services.Configure<MailSettings>(a => {
+            services.Configure<MailSettings>(a =>
+            {
                 a.DisplayName = mailSetting[nameof(MailSettings.DisplayName)];
                 a.Host = mailSetting[nameof(MailSettings.Host)];
                 a.Password = mailSetting[nameof(MailSettings.Password)];
                 a.Port = Convert.ToInt32(mailSetting[nameof(MailSettings.Port)]);
                 a.Mail = mailSetting[nameof(MailSettings.Mail)];
             });
+            services.AddSignalR();
             //inject
             services.AddTransient<IMailService, MailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,Microsoft.AspNetCore.Hosting.IHostingEnvironment env2)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.AspNetCore.Hosting.IHostingEnvironment env2)
         {
             if (env.IsDevelopment())
             {
@@ -89,6 +85,7 @@ namespace ELAKIL.UI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }

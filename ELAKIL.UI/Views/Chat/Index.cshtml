@@ -1,0 +1,40 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/chat.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
+}
+<input id="currentUser" value="@User.Identity.Name" type="hidden"/>
+<main id="main">
+    <section class="breadcrumbs">
+        <div class="container" data-aos="fade-up">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="#">Messaging</a>
+                <ol>
+                    <li><a href="/Home">Home</a></li>
+                    <li>Chat</li>
+                </ol>
+            </div>
+
+        </div>
+    </section>
+    <div class="container">
+        <div class="messaging">
+            <div class="inbox_msg">
+                @if (User.IsInRole(ApplicationRoles.Admin.ToString()))
+                {
+                    <partial name="_AdminChat" />
+                }
+                else
+                {
+                    <partial name="_ClientChat" />
+                }
+
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts{
+
+    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+}

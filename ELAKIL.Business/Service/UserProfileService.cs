@@ -32,5 +32,9 @@ namespace ELAKIL.Business.Service
                 throw new ArgumentNullException($"Entity UserProfile {name} Not Found");
             return user.Id;
         }
+        public async Task<UserProfile> GetUserProfileAsync(int userId)
+        {
+            return await _context.UserProfiles.FindAsync(userId);
+        }
     }
 }

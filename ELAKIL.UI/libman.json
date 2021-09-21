@@ -1,12 +1,13 @@
 {
   "version": "1.0",
-  "defaultProvider": "cdnjs",
+  "defaultProvider": "unpkg",
   "libraries": [
     {
-      "library": "datatables.net@2.1.1",
-      "destination": "wwwroot/datatables.net/",
+      "library": "@microsoft/signalr@latest",
+      "destination": "wwwroot/microsoft/signalr/",
       "files": [
-        "jquery.dataTables.min.js"
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.min.js"
       ]
     }
   ]

@@ -34,7 +34,7 @@
 
     <!-- Template Main CSS File -->
     <link href="/css/style.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!-- =======================================================
     * Template Name: Restaurantly - v3.3.0
     * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
@@ -42,7 +42,8 @@
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
 
-    <link src="https://code.jquery.com/jquery-3.6.0.js"/>
+    <link src="https://code.jquery.com/jquery-3.6.0.js" />
+    @RenderSection("Styles", required: false)
 </head>
 <body>
 
@@ -91,7 +92,7 @@
          
             <div class="d-flex">
                 <partial name="_Checkout" />
-                <a class="book-a-table-btn scrollto d-none d-lg-flex" href="/Home/Index#book-a-table">Book a table</a>
+                <a class="nav-link scrollto cart-btn ml-2" href="/Chat"><i class="bi bi-chat-dots-fill"></i></a>
             </div>
         </div>
     </header><!-- End Header -->

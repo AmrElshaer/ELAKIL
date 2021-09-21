@@ -55,5 +55,6 @@ namespace ELAKIL.Business.Contexts
         public DbSet<About> Abouts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<UserCartItem> UserCartItems { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

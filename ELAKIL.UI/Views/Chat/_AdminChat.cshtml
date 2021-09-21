@@ -1,0 +1,43 @@
+﻿@inject IMessageService messageService
+@{
+    var messages =  messageService.GetUserSendMessagesAsync();
+}
+<div class="inbox_people">
+    <div class="headind_srch">
+        <div class="recent_heading">
+            <h4>Recent</h4>
+        </div>
+    </div>
+    <div class="inbox_chat">
+        @if (!messages.Any())
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Warning!</strong> No messages send yet.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @foreach (var message in messages)
+        {
+            if (message.FromUserProfile != null)
+            {
+                <a asp-action="ChatWith" asp-route-toUser="@message.FromUserProfileId">
+                    <div class="chat_list">
+                        <div class="chat_people">
+                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"> </div>
+                            <div class="chat_ib">
+                                <h5>@message.FromUserProfile.Name.Split('@')[0]<span class="chat_date">@message.SendDate.ToString("hh : mm - MMMM dd")</span></h5>
+                                <p>
+                                    @message.Content
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+
+
+        }
+    </div>
+</div>

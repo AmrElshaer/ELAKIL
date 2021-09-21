@@ -38,6 +38,7 @@ namespace ELAKIL.Business
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IAboutService, AboutService>();
             services.AddScoped<IUserCartItemService, UserCartItemService>();
+            services.AddScoped<IMessageService, MessageService>();
             return services;
         }
     }
