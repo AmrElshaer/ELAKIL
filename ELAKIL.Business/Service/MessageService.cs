@@ -42,7 +42,7 @@ namespace ELAKIL.Business.Service
         {
            var result=  this.dbContext.Messages.Include(a => a.FromUserProfile).Include(a=>a.ToUserProfile)
                 .OrderByDescending(a=>a.SendDate)
-                .AsEnumerable().GroupBy(a => a.FromUserProfileId).Select(a=>a.LastOrDefault()).ToList();
+                .AsEnumerable().GroupBy(a => a.FromUserProfileId).Select(a=>a.FirstOrDefault()).ToList();
             return result;
         }
         public async Task<IEnumerable<Message>> GetMessagesAsync(int userId)

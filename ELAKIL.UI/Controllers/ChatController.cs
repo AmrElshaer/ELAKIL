@@ -1,4 +1,5 @@
 ﻿using ELAKIL.Business.IService;
+using ELAKIL.UI.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,14 +15,17 @@ namespace ELAKIL.UI.Controllers
     {
         private readonly IMessageService messageService;
         private readonly IUserProfileService userProfileService;
+        private readonly ChatService chatService;
 
-        public ChatController(IMessageService messageService,IUserProfileService userProfileService)
+        public ChatController(IMessageService messageService,IUserProfileService userProfileService,ChatService chatService)
         {
             this.messageService = messageService;
             this.userProfileService = userProfileService;
+            this.chatService = chatService;
         }
         public IActionResult Index()
         {
+            chatService.MessagesNotSee.TryRemove(User.Identity.Name,out int count);
             return View();
         }
         public async Task<IActionResult> ChatWith(int toUser)

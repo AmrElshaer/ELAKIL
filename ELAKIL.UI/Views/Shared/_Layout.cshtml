@@ -1,4 +1,6 @@
-﻿@inject ELAKIL.Business.IService.IAboutService _aboutService
+﻿@using ELAKIL.UI.Hubs
+@inject ELAKIL.Business.IService.IAboutService _aboutService
+@inject ChatService chatService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +45,7 @@
     ======================================================== -->
 
     <link src="https://code.jquery.com/jquery-3.6.0.js" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
@@ -89,15 +92,29 @@
 
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
-         
+
             <div class="d-flex">
                 <partial name="_Checkout" />
-                <a class="nav-link scrollto cart-btn ml-2" href="/Chat"><i class="bi bi-chat-dots-fill"></i></a>
+                <a class="nav-link scrollto cart-btn ml-2" href="/Chat">
+                    <i class="bi bi-chat-dots-fill"></i>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        if (chatService.MessagesNotSee.TryGetValue(User.Identity.Name, out int count))
+                        {
+                            <span class="badge-pill badge-light">@count</span>
+
+                        }
+
+                    }
+
+                </a>
             </div>
         </div>
     </header><!-- End Header -->
     <main>
-            @RenderBody()
+        @RenderBody()
+
     </main>
     <!-- ======= Footer ======= -->
     <footer id="footer">
@@ -193,12 +210,29 @@
 
     <!-- Template Main JS File -->
     <script src="/js/main.js"></script>
-
+    
     <!-- Older JS from ASP -->
     <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        "use strict";
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        connection.on("ReceiveMessage", function (user, message) {
+            if (!window.location.pathname.split('/').includes('Chat')) {
+                alertify.notify(`<img style="max-width:50px" src="https://ptetutorials.com/images/user-profile.png"/> ${user}<p>${message}<p/>`, 'success', 0, function () { console.log('dismissed'); });
+            }
+        });
+        connection.start().then(function () {
+            console.log("connection start");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
