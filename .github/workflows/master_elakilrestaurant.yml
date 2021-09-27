@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'ElakilRestaurant'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_79B1C89AC1F14E42B4942551B0A7032E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0F6A1F7E0AA64A3AB03DD6D9ACD952AA }}
           package: .
