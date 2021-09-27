@@ -4,6 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-ELAKIL.UI-E01D0A49-4E67-49F5-9C63-A10E40755C92</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
 
   <ItemGroup>
