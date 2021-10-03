@@ -46,6 +46,12 @@
 
     <link src="https://code.jquery.com/jquery-3.6.0.js" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <style>
+        .field-validation-error {
+            color: red;
+            font-size: smaller;
+        }
+    </style>
     @RenderSection("Styles", required: false)
 </head>
 <body>
@@ -210,7 +216,7 @@
 
     <!-- Template Main JS File -->
     <script src="/js/main.js"></script>
-    
+
     <!-- Older JS from ASP -->
     <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -232,6 +238,7 @@
             return console.error(err.toString());
         });
     </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>
